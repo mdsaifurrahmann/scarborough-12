@@ -1,0 +1,77 @@
+/* vision section */
+.vision-author {
+    @apply flex flex-col xl:flex-row justify-center items-center mb-24;
+
+    .author-img {
+        @apply border-2 xl:border border-primary rounded-lg overflow-hidden drop-shadow-md w-[230px] h-fit;
+
+        img {
+            @apply grayscale;
+        }
+    }
+
+    .author-data {
+        @apply flex justify-center xl:justify-normal items-center xl:items-start flex-col w-full mt-12 xl:mt-0;
+
+        .author-info {
+            @apply xl:bg-primary rounded-lg py-2 px-6 xl:pr-8 break-words w-fit relative -z-10;
+
+            h3,
+            p {
+                @apply text-center py-2 xl:py-0;
+            }
+
+            h3 {
+                @apply text-4xl xl:text-3xl;
+            }
+
+            p {
+                @apply text-2xl xl:text-base;
+            }
+        }
+
+        .description {
+            @apply relative top-5 py-2 px-4 break-words w-9/10 xl:w-full text-center font-ysabeau text-xl;
+        }
+    }
+
+
+}
+
+
+.vision-author:nth-child(odd) {
+
+    .author-info {
+        @apply xl:pr-8 xl:top-5 3xl:top-4 xl:-left-8 -z-10;
+
+        h3,
+        p {
+            @apply xl:text-left xl:ml-6;
+        }
+
+
+    }
+
+    .description {
+        @apply xl:text-left;
+    }
+
+}
+
+.vision-author:nth-child(even) {
+    @apply xl:flex-row-reverse;
+
+    .author-info {
+        @apply xl:pl-8 xl:top-5 3xl:top-4 xl:-right-8 -z-10 xl:ml-auto;
+
+        h3,
+        p {
+            @apply xl:mr-6 text-center xl:text-right;
+        }
+    }
+
+    .description {
+        @apply text-center xl:text-right;
+    }
+
+}

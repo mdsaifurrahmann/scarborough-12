@@ -1,0 +1,74 @@
+.hero {
+    .swiper-navigation-container {
+        @apply hidden opacity-0 invisible xl:flex xl:opacity-100 xl:visible justify-between absolute bottom-2/4 w-full z-10;
+    }
+
+    .swiper-pagination-bullet-active {
+        @apply !bg-primary;
+    }
+
+    .swiper-pagination-bullet {
+        @apply opacity-100 h-1.5 w-1.5 !mx-0.5;
+    }
+
+    .swiper-slide {
+        @apply !rounded-xl min-h-56 lg:h-[600px];
+
+        img {
+            @apply !rounded-xl h-full w-full object-cover;
+        }
+    }
+}
+
+
+
+.root {
+
+    background-position: 42% -7rem;
+
+
+
+    @apply my-24 relative;
+
+    .card {
+        @apply bg-primary min-h-[290px] text-xl p-6 lg:p-8 rounded-lg w-6/9 md:w-4/9 lg:w-[350px] xl:w-[290px] break-words;
+    }
+
+    .root-title {
+        @apply relative text-[2.3rem];
+
+        &::after {
+            content: "";
+            @apply w-full h-[1px] bg-primary block absolute bottom-5;
+        }
+    }
+}
+
+.why {
+    /* .after{
+    &::after{
+      content: '';
+      @apply w-full h-[3px] bg-white relative block bottom-9.5 mx-auto rounded-full;
+    }
+  } */
+}
+
+
+.get-in-touch {
+    @apply my-22;
+
+}
+
+@media (max-width: 1024px) {
+    .root {
+        background-position: 38% -2.5rem;
+        background-size: 32rem;
+    }
+}
+
+@media (min-width: 2048px) {
+    .root {
+        background-position: 48% -5.5rem;
+        background-size: 38rem;
+    }
+}

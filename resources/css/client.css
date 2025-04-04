@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Aboreto&family=Ysabeau+Infant:ital,wght@0,1..1000;1,1..1000&display=swap');
+@import 'tailwindcss';
+
+@import './hamburger.css';
+@import './home.css';
+@import './vision.css';
+@import './join-us.css';
+
+@theme {
+    --font-aboreto: 'Aboreto', sans-serif;
+    --font-ysabeau: 'Ysabeau Infant', sans-serif;
+    --color-primary: #ffc603;
+    --color-secondary: #ff0000;
+    --color-offwhite: #f8f8f8;
+    --color-darkwhite: #ededed;
+    --min-h-66: 16rem;
+    --min-h-68: 17rem;
+    --min-h-69: 17.25rem;
+    --breakpoint-3xl: 112rem;
+    --breakpoint-4xl: 128rem;
+    --breakpoint-5xl: 160rem;
+    --breakpoint-6xl: 176rem;
+}
+
+* {
+    @apply scroll-smooth transition-all duration-200;
+}
+
+body {
+    @apply font-aboreto;
+}
+
+section .container,
+div .container {
+    @apply 5xl:!w-[40%] mx-auto !w-[95%] md:!w-full lg:!w-[90%] xl:!w-[70%] 2xl:!w-[56%];
+}
+
+header.client-header {
+    nav {
+        @apply lg:bg-primary block h-0 w-full flex-row items-center justify-center gap-5 rounded-md lg:flex lg:h-auto;
+
+        .nav-item {
+            @apply bg-primary relative -top-[100vh] z-20 my-1 rounded-md text-center opacity-0 transition-all duration-700 lg:-top-0 lg:my-0 lg:!flex lg:rounded-none lg:bg-none lg:text-inherit lg:opacity-100 lg:transition-none;
+        }
+
+        .nav-item.open {
+            @apply !-top-0 !opacity-100 shadow lg:-top-0 lg:opacity-100;
+        }
+
+        .nav-link {
+            @apply block rounded-md px-2 py-4 uppercase transition-all duration-200 lg:rounded-none;
+
+            &:hover {
+                @apply bg-white;
+            }
+        }
+    }
+}
+
+/* Common CSS */
+.section-title {
+    @apply mb-8 text-center text-[2.3rem];
+}
+
+.btn-1 {
+    @apply bg-primary rounded-lg px-6 py-2 text-[15px];
+}
+
+/* SECTION JOIN US */
+.join-us {
+    @apply absolute -top-20 left-0 w-full;
+
+    .swiper-wrapper {
+        @apply lg:items-center lg:justify-center;
+    }
+
+    .swiper-slide {
+        @apply !w-[220px];
+
+        .title {
+            @apply w-full text-center text-[26px];
+        }
+    }
+
+    .card {
+        @apply bg-primary flex h-[310px] flex-col justify-between rounded-lg p-4 text-xl break-words lg:p-6;
+    }
+}
+
+footer.client-footer {
+    background: rgb(255, 198, 3);
+    background: -moz-linear-gradient(0deg, rgba(255, 198, 3, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    background: -webkit-linear-gradient(0deg, rgba(255, 198, 3, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    background: linear-gradient(0deg, rgba(255, 198, 3, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffc603", endColorstr="#ffffff", GradientType=1);
+}
