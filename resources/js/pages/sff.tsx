@@ -7,12 +7,11 @@ import JoinUs from '@/components/client/home/join-us';
 import StayUpdated from '@/components/client/sff/stay-updated';
 
 
-
-export default function Sff() {
+function Sff() {
     return (
-        <ClientLayout>
+        <>
             <Head>
-                <title>SFF2025 - Scarborough Folk Fest</title>
+                <title>SFF2025</title>
             </Head>
 
             <Hero />
@@ -20,7 +19,11 @@ export default function Sff() {
             <JoinUs />
             <StayUpdated />
 
-        </ClientLayout>
+        </>
     );
 
 }
+
+Sff.layout = (page: React.ReactNode) => <ClientLayout>{page}</ClientLayout>;
+
+export default Sff;

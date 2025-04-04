@@ -45,6 +45,16 @@ class PublicRoutes extends Controller
         ]);
     }
 
+    public function contact(Request $request)
+    {
+        return Inertia::render('home', [
+            'title' => 'Contact',
+            'success' => $request->session()->get('success'),
+            'error' => $request->session()->get('error'),
+            'requiresChallenge' => $request->session()->get('requiresChallenge'),
+        ]);
+    }
+
     public function applyVendor(Request $request)
     {
         return Inertia::render('vendor_application', [

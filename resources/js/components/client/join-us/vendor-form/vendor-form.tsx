@@ -1,13 +1,13 @@
 import { useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 import { FormEventHandler, useRef, useState } from 'react';
-import { Turnstile } from '@marsidev/react-turnstile';
+import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile';
 
 import { Input } from '@/components/ui/input';
 import { Checkbox } from "@/components/ui/checkbox"
 import InputError from '@/components/input-error';
-import { Label } from '@/components/ui/label';
-import { Button } from '@/components/ui/button';
+// import { Label } from '@/components/ui/label';
+// import { Button } from '@/components/ui/button';
 import { toast } from "sonner";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 
@@ -62,7 +62,7 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
     const [currentStep, setCurrentStep] = useState(1);
 
 
-    const turnstileRef = useRef<any>(null);
+    const turnstileRef = useRef<TurnstileInstance | null>(null);
 
 
     const { data, setData, post, processing, errors, reset } = useForm<VendorFormData>({
@@ -431,14 +431,14 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
     const handleNext = () => {
         if (currentStep < totalSteps) {
             setCurrentStep(prev => prev + 1);
-            window.scrollTo(0, 300);
+            window.scrollTo(0, 250);
         }
     };
 
     const handleBack = () => {
         if (currentStep > 1) {
             setCurrentStep(prev => prev - 1);
-            window.scrollTo(0, 300);
+            window.scrollTo(0, 250);
         }
     };
 
@@ -450,7 +450,7 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
     const submit: FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
 
-        console.log(data);
+        // console.log(data);
 
 
         post(route('vendor-applications.store'), {
@@ -475,6 +475,7 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                     if (turnstileRef.current) {
                         turnstileRef.current.reset(); // Reset Turnstile widget
                     }
+                    // setCurrentStep(1);
 
                 } else if (response.props.error) {
                     console.log('else if error:', data);
@@ -560,7 +561,8 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                                     disabled={processing}
                                     className="bg-primary px-4 py-2 rounded hover:bg-primary-dark cursor-pointer"
                                 >
-                                    {processing ? <LoaderCircle className="animate-spin" /> : 'Submit'}
+                                        {/* {processing && <LoaderCircle className="h-4 w-4 animate-spin" />} */}
+                                        {success ? 'Submitted' : error ? 'Try Again' : processing ? <LoaderCircle className="h-4 w-4 animate-spin" /> : 'Submit'}
                                 </button>
                             )}
                         </div>

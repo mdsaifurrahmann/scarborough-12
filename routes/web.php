@@ -11,7 +11,7 @@ Route::get('/', [PublicRoutes::class, 'root'])->name('/');
 Route::get('home', [PublicRoutes::class, 'home'])->name('home');
 Route::get('sff', [PublicRoutes::class, 'sff'])->name('sff');
 Route::get('vision', [PublicRoutes::class, 'vision'])->name('vision');
-Route::get('contact', [PublicRoutes::class, 'home'])->name('contact');
+Route::get('contact', [PublicRoutes::class, 'contact'])->name('contact');
 Route::get('join-us', [PublicRoutes::class, 'joinUs'])->name('join-us');
 Route::get('join-us/apply-vendor', [PublicRoutes::class, 'applyVendor'])->name('apply-vendor');
 

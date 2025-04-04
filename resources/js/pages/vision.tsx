@@ -6,18 +6,22 @@ import TopSection from '@/components/client/vision/top-section';
 
 
 
-export default function vision() {
+function vision() {
     return (
-        <ClientLayout>
+        <>
             <Head>
-                <title>Vision - Scarborough Folk Fest</title>
+                <title>Vision</title>
             </Head>
 
             <TopSection />
             {/* <Team /> */}
 
 
-        </ClientLayout>
+        </>
     );
 
 }
+
+vision.layout = (page: React.ReactNode) => <ClientLayout>{page}</ClientLayout>;
+
+export default vision;

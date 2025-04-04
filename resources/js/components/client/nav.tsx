@@ -25,7 +25,7 @@ const navItems: NavItem[] = [
     },
     {
         title: 'contact',
-        url: '/home',
+        url: '/contact',
     },
     {
         title: 'join us',
@@ -35,7 +35,7 @@ const navItems: NavItem[] = [
 ];
 
 
-export default function Nav({ menuOpen }: { menuOpen: boolean }) {
+export default function Nav({ menuOpen, setMenuOpen }: { menuOpen: boolean; setMenuOpen: (open: boolean) => void }) {
     const page = usePage();
 
     return (
@@ -52,7 +52,7 @@ export default function Nav({ menuOpen }: { menuOpen: boolean }) {
                             onClick={(e) => {
                                 if (!isContactLink) return; // Only handle contact link
 
-                                const isHomePage = page.url === '/home';
+                                const isHomePage = page.url === '/contact';
 
                                 if (isHomePage) {
                                     e.preventDefault();
@@ -62,6 +62,7 @@ export default function Nav({ menuOpen }: { menuOpen: boolean }) {
                                 } else {
                                     sessionStorage.setItem('scrollTo', 'contact');
                                 }
+                                setMenuOpen(false);
                             }}
                         >
                             {item.title}

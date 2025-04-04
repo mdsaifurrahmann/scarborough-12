@@ -1,7 +1,7 @@
 import { useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 import { FormEventHandler, useRef } from 'react';
-import { Turnstile } from '@marsidev/react-turnstile';
+import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile';
 
 import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
@@ -33,7 +33,7 @@ export default function GetInTouch({ success, error }: GetInTouchProps) {
     });
 
 
-    const turnstileRef = useRef<any>(null);
+    const turnstileRef = useRef<TurnstileInstance | null>(null);
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
@@ -131,7 +131,9 @@ export default function GetInTouch({ success, error }: GetInTouchProps) {
 
                             <Button
                                 className="absolute -bottom-[2.8rem] left-2/4 transform -translate-x-2/4 z-10 bg-primary rounded-md w-7/10 py-2 mt-4 cursor-pointer mx-auto"
-                                type="submit" disabled={processing}>{processing && <LoaderCircle className="h-4 w-4 animate-spin" />} {success ? success : error ? error : 'send message'}</Button>
+                                type="submit" disabled={processing}>
+                                {/* {processing && <LoaderCircle className="h-4 w-4 animate-spin" />} */}
+                                {success ? success : error ? error : processing ? <LoaderCircle className="h-4 w-4 animate-spin" /> : 'send message'}</Button>
                         </form>
                     </div>
                     <div className="col-span-8 xl:col-span-3 flex flex-col gap-4 mt-28 xl:mt-0">

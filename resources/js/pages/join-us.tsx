@@ -7,11 +7,11 @@ import BottomSection from '@/components/client/join-us/bottom-section';
 
 
 
-export default function joinus() {
+function joinus() {
     return (
-        <ClientLayout>
+        <>
             <Head>
-                <title>Join Us - Scarborough Folk Fest</title>
+                <title>Join Us</title>
             </Head>
 
             <TopSection />
@@ -20,7 +20,11 @@ export default function joinus() {
             {/* <Team /> */}
 
 
-        </ClientLayout>
+        </>
     );
 
 }
+
+joinus.layout = (page: React.ReactNode) => <ClientLayout>{page}</ClientLayout>;
+
+export default joinus;

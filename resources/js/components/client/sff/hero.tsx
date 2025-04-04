@@ -19,10 +19,10 @@ const Hero = () => {
     eventStarted: false,
   });
 
-  // July 26, 2025 (month is 0-indexed in JS Date)
-  const targetDate = new Date(2025, 6, 26);
-
   useEffect(() => {
+
+    // July 26, 2025 (month is 0-indexed in JS Date)
+    const targetDate = new Date(2025, 6, 26);
     const updateCountdown = (): void => {
       const now = new Date();
 
@@ -31,7 +31,7 @@ const Hero = () => {
         return;
       }
 
-      let tempDate = new Date(now);
+      const tempDate = new Date(now);
       let months = 0;
 
       // Calculate full months remaining

@@ -186,8 +186,6 @@ class VendorApplicationsRequest extends FormRequest
             // Update the record
             $store->update(['vendor_permit_copy' => $fileName]);
         }
-
-        dd($store);
     }
 
 

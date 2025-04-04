@@ -1,7 +1,7 @@
 import "../../css/client.css";
 import { motion } from "framer-motion";
 import { usePage } from "@inertiajs/react";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, Suspense } from "react";
 
 import ClientHeader from "@/components/client-header";
 import ClientFooter from "@/components/client-footer";
@@ -23,7 +23,8 @@ const AppLayout = ({ children }: PropsWithChildren<AppLayoutProps>) => {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.5, ease: "easeInOut" }}
             >
-                {children}
+                <Suspense fallback={null}>{children}</Suspense>
+                {/* {children} */}
             </motion.div>
             <ClientFooter />
         </>

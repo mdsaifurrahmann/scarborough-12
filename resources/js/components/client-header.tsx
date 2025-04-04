@@ -1,5 +1,5 @@
 import Nav from '@/components/client/nav';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, usePage } from '@inertiajs/react';
 
 const ClientHeader = () => {
@@ -10,6 +10,11 @@ const ClientHeader = () => {
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     };
+
+    // Close the mobile menu when the URL changes (i.e. navigation occurs)
+    useEffect(() => {
+        setMenuOpen(false);
+    }, [Page.url]);
 
     return (
         <header className={Page.url === '/sff' ? 'z-10 client-header ' : 'z-50 min-h-28 lg:min-h-64 client-header '}>
@@ -51,7 +56,7 @@ const ClientHeader = () => {
                                 </button>
                             </div>
                         </div>
-                        <Nav menuOpen={menuOpen} />
+                        <Nav menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
                     </nav>
                 </div>
             </div>

@@ -8,14 +8,14 @@ import { Toaster } from "@/components/ui/sonner"
 
 
 
-export default function VendorApplication() {
+function VendorApplication() {
 
     const page = usePage();
 
     return (
-        <ClientLayout>
+        <>
             <Head>
-                <title>Apply for Vendor - Scarborough Folk Fest</title>
+                <title>Apply for Vendor</title>
             </Head>
 
             <TopSection />
@@ -26,7 +26,11 @@ export default function VendorApplication() {
             <Toaster />
 
 
-        </ClientLayout>
+        </>
     );
 
 }
+
+VendorApplication.layout = (page: React.ReactNode) => <ClientLayout>{page}</ClientLayout>;
+
+export default VendorApplication;

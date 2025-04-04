@@ -9,13 +9,9 @@ import SupportedBy from '@/components/client/home/supported-by';
 import Why from '@/components/client/home/why';
 import JoinUs from '@/components/client/home/join-us';
 import GetInTouch from '@/components/client/home/get-in-touch-v3';
-// import GetInTouch from '@/components/client/home/get-in-touch';
-import { Toaster } from "@/components/ui/sonner"
+import { Toaster } from "@/components/ui/sonner";
 
-
-
-export default function Home() {
-
+function Home() {
     const page = usePage();
 
     useEffect(() => {
@@ -28,9 +24,9 @@ export default function Home() {
     }, []);
 
     return (
-        <ClientLayout>
+        <>
             <Head>
-                <title>Home - Scarborough Folk Fest</title>
+                <title>{ page.url === '/home' ? 'Home' : page.url === '/contact' ? 'Contact' : '' }</title>
             </Head>
 
             <Hero />
@@ -40,10 +36,12 @@ export default function Home() {
             <Why />
             <JoinUs />
             <GetInTouch success={page.props.success as string} error={page.props.error as string} />
-
-            <Toaster/>
-
-        </ClientLayout>
+            <Toaster />
+        </>
     );
-
 }
+
+// Attach the persistent layout to the page component.
+Home.layout = (page: React.ReactNode) => <ClientLayout>{page}</ClientLayout>;
+
+export default Home;

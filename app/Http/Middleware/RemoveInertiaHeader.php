@@ -15,35 +15,17 @@ class RemoveInertiaHeader
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        $response = $next($request);
 
-        $response->headers->set('Developer', 'Codebumble');
+        $headersToRemove = [
+            'X-Powered-By',
+            'Server',
+            'Vary',
+            // 'X-Custom-Header'
+        ];
 
-        // Remove or replace the "Vary: X-Inertia" header
-        if ($response->headers->has('Vary')) {
-            $varyHeaders = explode(',', $response->headers->get('Vary'));
-            $filteredHeaders = array_filter($varyHeaders, function ($header) {
-                return trim($header) !== 'X-Inertia';
-            });
-
-            if (empty($filteredHeaders)) {
-                $response->headers->remove('Vary');
-            } else {
-                $response->headers->set('Vary', 'User-Agent');
-            }
-        }
-
-        if ($response->headers->has('X-Powered-By')) {
-            $varyHeaders = explode(',', $response->headers->get('X-Powered-By'));
-            $filteredHeaders = array_filter($varyHeaders, function ($header) {
-                return trim($header) !== 'PHP/8.3.13';
-            });
-
-            if (empty($filteredHeaders)) {
-                $response->headers->remove('X-Powered-By');
-            } else {
-                $response->headers->set('X-Powered-By', 'Unknown');
-            }
+        foreach ($headersToRemove as $header) {
+            $response->headers->remove($header);
         }
 
         return $response;
