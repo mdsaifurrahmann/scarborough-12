@@ -1,9 +1,9 @@
+import type { AppPage } from '@inertiajs/react';
 import { createInertiaApp as ReactApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createRoot } from 'react-dom/client';
 import { route as routeFn } from 'ziggy-js';
 import { initializeTheme } from './hooks/use-appearance';
-import type { AppPage } from '@inertiajs/react';
 
 declare global {
     const route: typeof routeFn;
@@ -19,7 +19,7 @@ ReactApp({
         // Get the page component (which is the currently rendered component)
         const PageComponent = props.initialPage.component as unknown as AppPage;
         const getLayout = PageComponent.layout || ((page: React.ReactNode) => page);
-        
+
         root.render(getLayout(<App {...props} />));
     },
     progress: {

@@ -1,11 +1,10 @@
-import ClientLayout from "@/layouts/client-layout";
+import ClientLayout from '@/layouts/client-layout';
 import { Head } from '@inertiajs/react';
 
+import JoinUs from '@/components/client/home/join-us';
 import Hero from '@/components/client/sff/hero';
 import Location from '@/components/client/sff/location';
-import JoinUs from '@/components/client/home/join-us';
 import StayUpdated from '@/components/client/sff/stay-updated';
-
 
 function Sff() {
     return (
@@ -18,10 +17,8 @@ function Sff() {
             <Location />
             <JoinUs />
             <StayUpdated />
-
         </>
     );
-
 }
 
 Sff.layout = (page: React.ReactNode) => <ClientLayout>{page}</ClientLayout>;

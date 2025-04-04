@@ -1,11 +1,8 @@
-
-
 const StayUpdated = () => {
-
     return (
         <section className="mt-32 mb-32">
             <h3 className="section-title">STAY UPDATED</h3>
-            <div className="flex gap-12 items-center justify-center">
+            <div className="flex items-center justify-center gap-12">
                 <a href="https://www.facebook.com/Scarboroughfolkfest" target="_blank">
                     <img src="./images/social/fb.png" alt="facebook" loading="lazy" />
                 </a>

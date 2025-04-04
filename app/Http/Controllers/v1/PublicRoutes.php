@@ -8,7 +8,6 @@ use Inertia\Inertia;
 
 class PublicRoutes extends Controller
 {
-
     public function root()
     {
         return redirect(route('sff'));

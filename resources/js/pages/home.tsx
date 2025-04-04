@@ -1,15 +1,15 @@
-import ClientLayout from "@/layouts/client-layout";
+import ClientLayout from '@/layouts/client-layout';
 import { Head, usePage } from '@inertiajs/react';
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
-import Hero from '@/components/client/home/hero';
 import AfterHero from '@/components/client/home/after-hero';
+import GetInTouch from '@/components/client/home/get-in-touch-v3';
+import Hero from '@/components/client/home/hero';
+import JoinUs from '@/components/client/home/join-us';
 import Roots from '@/components/client/home/roots';
 import SupportedBy from '@/components/client/home/supported-by';
 import Why from '@/components/client/home/why';
-import JoinUs from '@/components/client/home/join-us';
-import GetInTouch from '@/components/client/home/get-in-touch-v3';
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from '@/components/ui/sonner';
 
 function Home() {
     const page = usePage();
@@ -26,7 +26,7 @@ function Home() {
     return (
         <>
             <Head>
-                <title>{ page.url === '/home' ? 'Home' : page.url === '/contact' ? 'Contact' : '' }</title>
+                <title>{page.url === '/home' ? 'Home' : page.url === '/contact' ? 'Contact' : ''}</title>
             </Head>
 
             <Hero />

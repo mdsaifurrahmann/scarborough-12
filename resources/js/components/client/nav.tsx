@@ -34,7 +34,6 @@ const navItems: NavItem[] = [
     },
 ];
 
-
 export default function Nav({ menuOpen, setMenuOpen }: { menuOpen: boolean; setMenuOpen: (open: boolean) => void }) {
     const page = usePage();
 
@@ -57,7 +56,7 @@ export default function Nav({ menuOpen, setMenuOpen }: { menuOpen: boolean; setM
                                 if (isHomePage) {
                                     e.preventDefault();
                                     document.getElementById('contact')?.scrollIntoView({
-                                        behavior: 'smooth'
+                                        behavior: 'smooth',
                                     });
                                 } else {
                                     sessionStorage.setItem('scrollTo', 'contact');

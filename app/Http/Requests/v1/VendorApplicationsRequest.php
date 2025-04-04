@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\v1;
 
-use Illuminate\Foundation\Http\FormRequest;
 use App\Models\v1\VendorModel;
 use App\Services\FileUpload;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Http;
 
 class VendorApplicationsRequest extends FormRequest
@@ -36,7 +36,7 @@ class VendorApplicationsRequest extends FormRequest
                 'nullable',
                 'string',
                 'required_if:vendor_type,Other',
-                'exclude_unless:vendor_type,Other'
+                'exclude_unless:vendor_type,Other',
             ],
             'product_services_desc' => ['string', 'required'],
             'min_price' => ['required', 'regex:/^\d+(\.\d{1,2})?$/'],
@@ -49,7 +49,7 @@ class VendorApplicationsRequest extends FormRequest
                 'mimes:pdf,jpg,jpeg,png,doc,docx',
                 'max:9216',
                 'required_if:vendor_permit,true',
-                'exclude_unless:vendor_permit,true'
+                'exclude_unless:vendor_permit,true',
             ],
             'comply_regulation' => ['nullable', 'boolean', 'in:0,1,true,false'],
             'space' => ['string', 'required'],
@@ -58,7 +58,7 @@ class VendorApplicationsRequest extends FormRequest
                 'nullable',
                 'string',
                 'required_if:electricity,true',
-                'exclude_unless:electricity,true'
+                'exclude_unless:electricity,true',
             ],
             'own_tent_table' => ['required', 'boolean', 'in:0,1,true,false'],
             'sponsore_opportunity' => ['required', 'boolean', 'in:0,1,true,false'],
@@ -75,15 +75,13 @@ class VendorApplicationsRequest extends FormRequest
 
                     $result = $response->json();
 
-                    if (!$result['success']) {
-                        $fail('Turnstile verification failed: ' . implode(', ', $result['error-codes'] ?? ['Unknown error']));
+                    if (! $result['success']) {
+                        $fail('Turnstile verification failed: '.implode(', ', $result['error-codes'] ?? ['Unknown error']));
                     }
                 },
             ],
         ];
     }
-
-
 
     public function messages(): array
     {
@@ -125,7 +123,6 @@ class VendorApplicationsRequest extends FormRequest
             'min_price.required' => 'Minimum price is required.',
             'min_price.regex' => 'The minimum price must be a valid number with up to 2 decimal places or a whole number.',
 
-
             'max_price.required' => 'Maximum price is required.',
             'max_price.regex' => 'The maximum price must be a valid number with up to 2 decimal places or a whole number.',
 
@@ -165,8 +162,6 @@ class VendorApplicationsRequest extends FormRequest
         ];
     }
 
-
-
     /**
      * Process and store the validated vendor application
      */
@@ -188,13 +183,12 @@ class VendorApplicationsRequest extends FormRequest
         }
     }
 
-
     /**
      * Handle the permit file upload
      */
     protected function handleFileUpload(): ?string
     {
-        if (!$this->validated('vendor_permit')) {
+        if (! $this->validated('vendor_permit')) {
             return null;
         }
 
@@ -213,7 +207,7 @@ class VendorApplicationsRequest extends FormRequest
             ...$data,
             'vendor_other' => $data['vendor_type'] === 'other' ? $data['vendor_other'] : null,
             'electricity_power' => $data['electricity'] ? $data['electricity_power'] : null,
-            'vendor_permit_copy' => $data['vendor_permit'] ? $data['vendor_permit_copy'] : null
+            'vendor_permit_copy' => $data['vendor_permit'] ? $data['vendor_permit_copy'] : null,
         ];
     }
 }

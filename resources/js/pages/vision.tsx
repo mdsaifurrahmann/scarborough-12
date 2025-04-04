@@ -1,10 +1,8 @@
-import ClientLayout from "@/layouts/client-layout";
+import ClientLayout from '@/layouts/client-layout';
 import { Head } from '@inertiajs/react';
 
 import TopSection from '@/components/client/vision/top-section';
 // import Team from '@/components/client/vision/teams';
-
-
 
 function vision() {
     return (
@@ -15,11 +13,8 @@ function vision() {
 
             <TopSection />
             {/* <Team /> */}
-
-
         </>
     );
-
 }
 
 vision.layout = (page: React.ReactNode) => <ClientLayout>{page}</ClientLayout>;
