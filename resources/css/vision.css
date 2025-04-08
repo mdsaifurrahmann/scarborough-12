@@ -1,9 +1,9 @@
 /* vision section */
 .vision-author {
-    @apply flex flex-col xl:flex-row justify-center items-center mb-24;
+    @apply mb-24 flex flex-col items-center justify-center xl:flex-row;
 
     .author-img {
-        @apply border-2 xl:border border-primary rounded-lg overflow-hidden drop-shadow-md w-[230px] h-fit;
+        @apply border-primary h-fit w-[230px] overflow-hidden rounded-lg border-2 drop-shadow-md xl:border;
 
         img {
             @apply grayscale;
@@ -11,14 +11,14 @@
     }
 
     .author-data {
-        @apply flex justify-center xl:justify-normal items-center xl:items-start flex-col w-full mt-12 xl:mt-0;
+        @apply mt-12 flex w-full flex-col items-center justify-center xl:mt-0 xl:items-start xl:justify-normal;
 
         .author-info {
-            @apply xl:bg-primary rounded-lg py-2 px-6 xl:pr-8 break-words w-fit relative -z-10;
+            @apply xl:bg-primary relative -z-10 w-fit rounded-lg px-6 py-2 break-words xl:pr-8;
 
             h3,
             p {
-                @apply text-center py-2 xl:py-0;
+                @apply py-2 text-center xl:py-0;
             }
 
             h3 {
@@ -31,47 +31,39 @@
         }
 
         .description {
-            @apply relative top-5 py-2 px-4 break-words w-9/10 xl:w-full text-center font-ysabeau text-xl;
+            @apply font-ysabeau relative top-5 w-9/10 px-4 py-2 text-center text-xl break-words xl:w-full;
         }
     }
-
-
 }
 
-
 .vision-author:nth-child(odd) {
-
     .author-info {
-        @apply xl:pr-8 xl:top-5 3xl:top-4 xl:-left-8 -z-10;
+        @apply 3xl:top-4 -z-10 xl:top-5 xl:-left-8 xl:pr-8;
 
         h3,
         p {
-            @apply xl:text-left xl:ml-6;
+            @apply xl:ml-6 xl:text-left;
         }
-
-
     }
 
     .description {
         @apply xl:text-left;
     }
-
 }
 
 .vision-author:nth-child(even) {
     @apply xl:flex-row-reverse;
 
     .author-info {
-        @apply xl:pl-8 xl:top-5 3xl:top-4 xl:-right-8 -z-10 xl:ml-auto;
+        @apply 3xl:top-4 -z-10 xl:top-5 xl:-right-8 xl:ml-auto xl:pl-8;
 
         h3,
         p {
-            @apply xl:mr-6 text-center xl:text-right;
+            @apply text-center xl:mr-6 xl:text-right;
         }
     }
 
     .description {
         @apply text-center xl:text-right;
     }
-
 }

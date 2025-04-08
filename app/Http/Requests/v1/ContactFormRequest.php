@@ -3,9 +3,9 @@
 namespace App\Http\Requests\v1;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Mews\Purifier\Facades\Purifier;
-use Illuminate\Support\Facades\Http;
 
 class ContactFormRequest extends FormRequest
 {
@@ -40,8 +40,8 @@ class ContactFormRequest extends FormRequest
 
                     $result = $response->json();
 
-                    if (!$result['success']) {
-                        $fail('Turnstile verification failed: ' . implode(', ', $result['error-codes'] ?? ['Unknown error']));
+                    if (! $result['success']) {
+                        $fail('Turnstile verification failed: '.implode(', ', $result['error-codes'] ?? ['Unknown error']));
                     }
                 },
             ],
@@ -66,10 +66,6 @@ class ContactFormRequest extends FormRequest
         ];
     }
 
-
-
-
-
     public function sendEmail(): void
     {
 
@@ -82,7 +78,7 @@ class ContactFormRequest extends FormRequest
 
         Mail::send('emails.contact', ['data' => $data], function ($message) use ($data) {
             $message->to(env('CONTACT_EMAIL'))
-                ->subject('Contact Request from ' . $data['name']);
+                ->subject('Contact Request from '.$data['name']);
         });
     }
 }

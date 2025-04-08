@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('vendor_applications', function (Blueprint $table) {
             $table->id();
-            
+
             $table->string('business_name');
             $table->string('contact_person');
             $table->string('phone_number');
@@ -36,7 +36,7 @@ return new class extends Migration
             $table->boolean('sponsore_opportunity');
             $table->text('special_request')->nullable();
             $table->boolean('agreement');
-            
+
             $table->timestamps();
         });
     }

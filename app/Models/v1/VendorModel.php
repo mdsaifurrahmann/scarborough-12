@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class VendorModel extends Model
 {
-    
     protected $table = 'vendor_applications';
 
     protected $fillable = [
@@ -18,7 +17,6 @@ class VendorModel extends Model
         'web_media',
         'vendor_type',
         'vendor_other',
-
 
         'product_services_desc',
         'min_price',
@@ -39,7 +37,6 @@ class VendorModel extends Model
         'agreement',
     ];
 
-
     protected $casts = [
         'agreement' => 'boolean',
         'liability_insurance' => 'boolean',
@@ -47,8 +44,6 @@ class VendorModel extends Model
         'comply_regulation' => 'boolean',
         'sponsorship_opportunity' => 'boolean',
         'own_tent_table' => 'boolean',
-        'electricity' => 'boolean'
+        'electricity' => 'boolean',
     ];
-
-
 }

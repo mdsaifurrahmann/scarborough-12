@@ -1,6 +1,6 @@
 import Nav from '@/components/client/nav';
-import { useState, useEffect } from 'react';
 import { Link, usePage } from '@inertiajs/react';
+import { useEffect, useState } from 'react';
 
 const ClientHeader = () => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -17,11 +17,8 @@ const ClientHeader = () => {
     }, [Page.url]);
 
     return (
-        <header className={Page.url === '/sff' ? 'z-10 client-header ' : 'z-50 min-h-28 lg:min-h-64 client-header '}>
-
-            {Page.url !== '/sff' && (
-                <div className="relative z-40 h-4 w-full bg-white lg:hidden lg:h-0 lg:w-0"></div>
-            )}
+        <header className={Page.url === '/sff' ? 'client-header z-10' : 'client-header z-50 min-h-28 lg:min-h-64'}>
+            {Page.url !== '/sff' && <div className="relative z-40 h-4 w-full bg-white lg:hidden lg:h-0 lg:w-0"></div>}
 
             <div className="container">
                 <div className="flex flex-col items-center justify-center">
@@ -30,8 +27,13 @@ const ClientHeader = () => {
                             <img src="/images/logo/ssf.svg" alt="Scarborough Folk Fest" className="mt-4 hidden w-64 lg:flex" />
                         </Link>
                     </div>
-                    <nav className='z-50'>
-                        <div className={'bg-primary relative z-30 flex w-full items-center justify-between rounded-md lg:hidden ' + (Page.url === '/sff' ? 'mt-4' : '')}>
+                    <nav className="z-50">
+                        <div
+                            className={
+                                'bg-primary relative z-30 flex w-full items-center justify-between rounded-md lg:hidden ' +
+                                (Page.url === '/sff' ? 'mt-4' : '')
+                            }
+                        >
                             <Link href={route('home')} prefetch>
                                 <img loading="lazy" src="/images/logo/ssf.svg" alt="Scarborough Folk Fest" className="w-36 pt-1 lg:hidden" />
                             </Link>

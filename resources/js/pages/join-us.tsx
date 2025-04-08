@@ -1,11 +1,9 @@
-import ClientLayout from "@/layouts/client-layout";
+import ClientLayout from '@/layouts/client-layout';
 import { Head } from '@inertiajs/react';
 
-import TopSection from '@/components/client/join-us/top-section';
-import Slider from '@/components/client/join-us/slider';
 import BottomSection from '@/components/client/join-us/bottom-section';
-
-
+import Slider from '@/components/client/join-us/slider';
+import TopSection from '@/components/client/join-us/top-section';
 
 function joinus() {
     return (
@@ -18,11 +16,8 @@ function joinus() {
             <Slider />
             <BottomSection />
             {/* <Team /> */}
-
-
         </>
     );
-
 }
 
 joinus.layout = (page: React.ReactNode) => <ClientLayout>{page}</ClientLayout>;
