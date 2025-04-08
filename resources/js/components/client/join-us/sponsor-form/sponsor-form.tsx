@@ -5,7 +5,6 @@ import { FormEventHandler, useRef, useState } from 'react';
 
 import InputError from '@/components/input-error';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Input } from '@/components/ui/input';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { toast } from 'sonner';
 
@@ -29,7 +28,6 @@ interface SponsorFormData {
     special_benefits?: string;
     why_interested: string;
     any_goal?: string;
-
 
     // Agreement
     agreement_1: boolean;
@@ -114,7 +112,6 @@ const SponsorForm = ({ success, error }: SponsorFormProps) => {
                 />
                 <InputError className="mb-3" message={errors.position} />
 
-
                 <label htmlFor="phone">
                     Phone Number <span className="text-red-500">*</span>
                 </label>
@@ -168,7 +165,6 @@ const SponsorForm = ({ success, error }: SponsorFormProps) => {
                     placeholder="https://example.com"
                 />
                 <InputError className="mb-3" message={errors.web_media} />
-
             </div>
         </>,
 
@@ -176,13 +172,10 @@ const SponsorForm = ({ success, error }: SponsorFormProps) => {
         <>
             <div className="flex flex-col">
                 <label>
-                    Sponsor Level<span className="text-red-500"> * (To learn More About Sponsorship Levels, check the link  https://chatgpt.com/)</span>
+                    Sponsor Level
+                    <span className="text-red-500"> * (To learn More About Sponsorship Levels, check the link https://chatgpt.com/)</span>
                 </label>
-                <RadioGroup
-                    className="mt-2 ml-3"
-                    value={data.sponsor_level}
-                    onValueChange={(value) => setData('sponsor_level', value)}
-                >
+                <RadioGroup className="mt-2 ml-3" value={data.sponsor_level} onValueChange={(value) => setData('sponsor_level', value)}>
                     <div className="flex items-center space-x-2">
                         <RadioGroupItem value="Platinum" id="Platinum" />
                         <label htmlFor="Platinum">Platinum</label>
@@ -207,8 +200,7 @@ const SponsorForm = ({ success, error }: SponsorFormProps) => {
         // Step 3: Legal Requirements
         <>
             <div className="flex flex-col">
-
-                <label htmlFor='special_benefits'>Do you have specific benefits or promotional opportunities you’d like to discuss?</label>
+                <label htmlFor="special_benefits">Do you have specific benefits or promotional opportunities you’d like to discuss?</label>
                 <textarea
                     name="special_benefits"
                     id="special_benefits"
@@ -219,7 +211,9 @@ const SponsorForm = ({ success, error }: SponsorFormProps) => {
                 />
                 <InputError className="mb-3" message={errors.special_benefits} />
 
-                <label htmlFor='why_interested'>Why are you interested in sponsoring the Scarborough Folk Fest? <span className="text-red-500"> * </span></label>
+                <label htmlFor="why_interested">
+                    Why are you interested in sponsoring the Scarborough Folk Fest? <span className="text-red-500"> * </span>
+                </label>
                 <textarea
                     name="why_interested"
                     id="why_interested"
@@ -247,8 +241,6 @@ const SponsorForm = ({ success, error }: SponsorFormProps) => {
 
         <>
             <div className="flex flex-col">
-
-
                 <div className="items-top mt-4 flex space-x-2">
                     <Checkbox
                         name="agreement_1"
@@ -266,7 +258,6 @@ const SponsorForm = ({ success, error }: SponsorFormProps) => {
                 </div>
 
                 <div className="items-top mt-4 flex space-x-2">
-
                     <Checkbox
                         name="agreement_2"
                         id="agreement_2"
@@ -298,7 +289,6 @@ const SponsorForm = ({ success, error }: SponsorFormProps) => {
                     </div>
                 </div>
 
-
                 <label htmlFor="signature" className="mt-3">
                     Signature <span className="text-red-500">*</span>
                 </label>
@@ -312,8 +302,6 @@ const SponsorForm = ({ success, error }: SponsorFormProps) => {
                     placeholder="Signature"
                 />
                 <InputError className="mb-3" message={errors.signature} />
-
-
 
                 <Turnstile
                     ref={turnstileRef}
@@ -330,9 +318,7 @@ const SponsorForm = ({ success, error }: SponsorFormProps) => {
                 />
 
                 <InputError message={errors['cf-turnstile-response']} />
-
             </div>
-
         </>,
     ];
 

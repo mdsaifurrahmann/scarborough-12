@@ -9,7 +9,7 @@ class SponsorModel extends Model
     protected $table = 'sponsor_applications';
 
     protected $fillable = [
-    
+
         'org_name',
         'contact_person',
         'position',
@@ -26,6 +26,5 @@ class SponsorModel extends Model
         'agreement_3',
         'signature',
 
-        
     ];
 }

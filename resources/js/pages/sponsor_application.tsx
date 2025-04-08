@@ -2,8 +2,8 @@ import ClientLayout from '@/layouts/client-layout';
 import { Head, usePage } from '@inertiajs/react';
 
 import BottomSection from '@/components/client/join-us/bottom-section';
-import TopSection from '@/components/client/join-us/top-section';
 import SponsorForm from '@/components/client/join-us/sponsor-form/sponsor-form';
+import TopSection from '@/components/client/join-us/top-section';
 import { Toaster } from '@/components/ui/sonner';
 
 function SponsorApplication() {

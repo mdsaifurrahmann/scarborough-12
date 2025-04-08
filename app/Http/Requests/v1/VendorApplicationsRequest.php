@@ -7,8 +7,8 @@ use App\Services\FileUpload;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
-use Mews\Purifier\Facades\Purifier;
 use Illuminate\Support\Facades\Log;
+use Mews\Purifier\Facades\Purifier;
 
 class VendorApplicationsRequest extends FormRequest
 {
@@ -79,7 +79,7 @@ class VendorApplicationsRequest extends FormRequest
                     $result = $response->json();
 
                     if (! $result['success']) {
-                        $fail('Turnstile verification failed: ' . implode(', ', $result['error-codes'] ?? ['Unknown error']));
+                        $fail('Turnstile verification failed: '.implode(', ', $result['error-codes'] ?? ['Unknown error']));
                     }
                 },
             ],
@@ -172,13 +172,10 @@ class VendorApplicationsRequest extends FormRequest
     {
         $validated = $this->validated();
 
-
         // Sanitize all string inputs
         $sanitized = array_map(function ($value) {
             return Purifier::clean($value);
         }, $validated);
-
-
 
         try {
             DB::beginTransaction();
@@ -196,7 +193,7 @@ class VendorApplicationsRequest extends FormRequest
 
             DB::commit();
         } catch (\Exception $e) {
-            Log::error('Error creating vendor application from Request ' . $e->getMessage());
+            Log::error('Error creating vendor application from Request '.$e->getMessage());
             DB::rollBack();
         }
     }

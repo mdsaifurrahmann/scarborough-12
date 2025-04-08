@@ -29,64 +29,64 @@ class SponsorRequest extends FormRequest
         return [
             'org_name' => [
                 'required',
-                'string'
+                'string',
             ],
             'contact_person' => [
                 'required',
-                'string'
+                'string',
             ],
             'position' => [
                 'required',
-                'string'
+                'string',
             ],
             'phone' => [
                 'required',
-                'string'
+                'string',
             ],
             'email' => [
                 'required',
-                'email'
+                'email',
             ],
             'company_addr' => [
                 'required',
-                'string'
+                'string',
             ],
             'web_media' => [
                 'nullable',
-                'url'
+                'url',
             ],
             'sponsor_level' => [
                 'required',
                 'string',
-                'in:Platinum,Gold,Silver,Bronze'
+                'in:Platinum,Gold,Silver,Bronze',
             ],
             'special_benefits' => [
                 'nullable',
-                'string'
+                'string',
             ],
             'why_interested' => [
                 'required',
-                'string'
+                'string',
             ],
             'any_goal' => [
                 'nullable',
-                'string'
+                'string',
             ],
             'agreement_1' => [
                 'required',
-                'accepted'
+                'accepted',
             ],
             'agreement_2' => [
                 'required',
-                'accepted'
+                'accepted',
             ],
             'agreement_3' => [
                 'required',
-                'accepted'
+                'accepted',
             ],
             'signature' => [
                 'required',
-                'string'
+                'string',
             ],
             'cf-turnstile-response' => [
                 'required',
@@ -100,13 +100,12 @@ class SponsorRequest extends FormRequest
                     $result = $response->json();
 
                     if (! $result['success']) {
-                        $fail('Turnstile verification failed: ' . implode(', ', $result['error-codes'] ?? ['Unknown error']));
+                        $fail('Turnstile verification failed: '.implode(', ', $result['error-codes'] ?? ['Unknown error']));
                     }
                 },
-            ]
+            ],
         ];
     }
-
 
     public function messages(): array
     {
@@ -172,7 +171,7 @@ class SponsorRequest extends FormRequest
 
             DB::commit();
         } catch (\Exception $e) {
-            Log::error('Error creating sponsor application from Request ' . $e->getMessage());
+            Log::error('Error creating sponsor application from Request '.$e->getMessage());
             DB::rollBack();
         }
     }
