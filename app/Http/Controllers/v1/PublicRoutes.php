@@ -63,4 +63,14 @@ class PublicRoutes extends Controller
             'requiresChallenge' => $request->session()->get('requiresChallenge'),
         ]);
     }
+
+    public function applySponsor(Request $request)
+    {
+        return Inertia::render('sponsor_application', [
+            'title' => 'Sponsor Application',
+            'success' => $request->session()->get('success'),
+            'error' => $request->session()->get('error'),
+            'requiresChallenge' => $request->session()->get('requiresChallenge'),
+        ]);
+    }
 }

@@ -12,6 +12,7 @@ Route::get('vision', [PublicRoutes::class, 'vision'])->name('vision');
 Route::get('contact', [PublicRoutes::class, 'contact'])->name('contact');
 Route::get('join-us', [PublicRoutes::class, 'joinUs'])->name('join-us');
 Route::get('join-us/apply-vendor', [PublicRoutes::class, 'applyVendor'])->name('apply-vendor');
+Route::get('join-us/apply-sponsor', [PublicRoutes::class, 'applySponsor'])->name('apply-sponsor');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {

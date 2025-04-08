@@ -5,8 +5,10 @@ namespace App\Http\Requests\v1;
 use App\Models\v1\VendorModel;
 use App\Services\FileUpload;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Mews\Purifier\Facades\Purifier;
+use Illuminate\Support\Facades\Log;
 
 class VendorApplicationsRequest extends FormRequest
 {
@@ -64,7 +66,7 @@ class VendorApplicationsRequest extends FormRequest
             'own_tent_table' => ['required', 'boolean', 'in:0,1,true,false'],
             'sponsore_opportunity' => ['required', 'boolean', 'in:0,1,true,false'],
             'special_request' => ['string', 'nullable'],
-            'agreement' => ['required', 'boolean', 'in:0,1,true,false'],
+            'agreement' => ['required', 'accepted'],
             'cf-turnstile-response' => [
                 'required',
                 function ($attribute, $value, $fail) {
@@ -77,7 +79,7 @@ class VendorApplicationsRequest extends FormRequest
                     $result = $response->json();
 
                     if (! $result['success']) {
-                        $fail('Turnstile verification failed: '.implode(', ', $result['error-codes'] ?? ['Unknown error']));
+                        $fail('Turnstile verification failed: ' . implode(', ', $result['error-codes'] ?? ['Unknown error']));
                     }
                 },
             ],
@@ -170,22 +172,32 @@ class VendorApplicationsRequest extends FormRequest
     {
         $validated = $this->validated();
 
+
         // Sanitize all string inputs
         $sanitized = array_map(function ($value) {
             return Purifier::clean($value);
         }, $validated);
 
-        // Create without the file field
-        $store = VendorModel::create(
-            collect($sanitized)->except('vendor_permit_copy')->toArray()
-        );
 
-        if ($store && $store->id) {
-            // Handle file upload
-            $fileName = $this->handleFileUpload();
 
-            // Update the record
-            $store->update(['vendor_permit_copy' => $fileName]);
+        try {
+            DB::beginTransaction();
+            $store = VendorModel::create(
+                collect($sanitized)->except('vendor_permit_copy')->toArray()
+            );
+
+            if ($store && $store->id) {
+                // Handle file upload
+                $fileName = $this->handleFileUpload();
+
+                // Update the record
+                $store->update(['vendor_permit_copy' => $fileName]);
+            }
+
+            DB::commit();
+        } catch (\Exception $e) {
+            Log::error('Error creating vendor application from Request ' . $e->getMessage());
+            DB::rollBack();
         }
     }
 

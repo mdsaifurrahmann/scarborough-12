@@ -36,7 +36,7 @@ const JoinUs = () => {
                             {/* <div className="swiper-wrapper"> */}
                             <SwiperSlide>
                                 <h3 className="title">SPONSOR</h3>
-                                <Link href={route('join-us')}>
+                                <Link href={route('apply-sponsor')}>
                                     <div className="card">
                                         <p className="font-ysabeau text-xl leading-[1.2]">
                                             Support the festival and make an impact! Become a sponsor and help bring Scarborough's cultural
