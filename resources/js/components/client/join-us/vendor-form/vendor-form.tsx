@@ -6,8 +6,6 @@ import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from "@/components/ui/checkbox"
 import InputError from '@/components/input-error';
-// import { Label } from '@/components/ui/label';
-// import { Button } from '@/components/ui/button';
 import { toast } from "sonner";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 
@@ -61,6 +59,7 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
 
     const [currentStep, setCurrentStep] = useState(1);
 
+    const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
     const turnstileRef = useRef<TurnstileInstance | null>(null);
 
@@ -133,8 +132,6 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
 
         setData('vendor_permit_copy', file);
     };
-
-
 
 
 
@@ -356,9 +353,6 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
         <>
             <div className='flex flex-col'>
 
-
-
-
                 <label>Are you interested in sponsorship opportunities? <span className='text-red-500'>*</span></label>
                 <RadioGroup className='ml-3 my-2' onValueChange={(value) => setData('sponsore_opportunity', value === "1" ? true : value === "0" ? false : undefined)}>
                     <div className="flex items-center space-x-2">
@@ -401,23 +395,24 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                             I also agree to hold Parampara Canada harmless from any liability or damages arising from my participation in the event.
                         </p>
 
-
                     </div>
-
-
-
                 </div>
-
-
 
 
                 <Turnstile
                     ref={turnstileRef}
                     siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
-                    onSuccess={(token) => setData('cf-turnstile-response', token)}
-                    onError={() => toast.error('Turnstile verification failed. Please try again.')}
+                    onSuccess={(token) => {
+                        setData('cf-turnstile-response', token);
+                        setTurnstileToken(token);
+                    }}
+                    onError={() => {
+                        toast.error('Turnstile verification failed. Please try again.');
+                        setTurnstileToken(null);
+                    }}
                     className="my-4"
                 />
+
                 <InputError message={errors['cf-turnstile-response']} />
 
             </div>
@@ -443,10 +438,6 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
     };
 
 
-
-
-
-
     const submit: FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
 
@@ -458,7 +449,7 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
             forceFormData: true,
 
             onSuccess: (response) => {
-                console.log('success:', response);
+                // console.log('success:', response);
                 if (response.props.success) {
                     toast.success("Success", {
                         duration: 5000,
@@ -475,10 +466,11 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                     if (turnstileRef.current) {
                         turnstileRef.current.reset(); // Reset Turnstile widget
                     }
-                    // setCurrentStep(1);
+                    setTurnstileToken(null); // Add this line
+                    setCurrentStep(1);
 
                 } else if (response.props.error) {
-                    console.log('else if error:', data);
+                    // console.log('else if error:', data);
                     toast.error("Error", {
                         duration: 5000,
                         description: () => <p className='text-red-500'>{response.props.error as string}</p>,
@@ -492,7 +484,7 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                 }
             },
             onError: (errors) => {
-                console.log('errors:', errors);
+                // console.log('errors:', errors);
                 Object.values(errors).forEach((msg) => {
                     toast.error(msg, {
                         duration: 5000,
@@ -509,22 +501,12 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
     }
 
 
-
     return (
         <section className="my-4 overflow-hidden">
             <div className="container">
                 <h2 className="text-2xl min-w-fit">Vendor Application Form | SFF2025</h2>
                 <div className="border border-primary rounded-lg shadow-lg p-4 my-4">
                     <h3 className='font-ysabeau text-xl'>We are excited to invite you to be a vendor of the Scarborough Folk Fest 2025, hosted by Parampara Canada. As a festival dedicated to fostering cultural exchange and celebrating diversity, the Scarborough Folk Fest offers a unique platform for vendor to engage with a vibrant, multicultural community.</h3>
-
-                    {/* <div className="flex justify-center mb-8">
-                        {[...Array(totalSteps)].map((_, index) => (
-                            <div key={index} className={`mx-2 w-8 h-8 rounded-full 
-                            ${currentStep > index + 1 ? 'bg-primary' : 'bg-gray-300'}
-                            ${currentStep === index + 1 ? 'border-2 border-primary' : ''}`}
-                            />
-                        ))}
-                    </div> */}
 
                     <form onSubmit={submit}>
                         {/* Current Step Content */}
@@ -558,17 +540,15 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                             ) : (
                                 <button
                                     type="submit"
-                                    disabled={processing}
-                                    className="bg-primary px-4 py-2 rounded hover:bg-primary-dark cursor-pointer"
+                                    disabled={!turnstileToken || processing}
+                                    className={`bg-primary px-4 py-2 rounded hover:bg-primary-dark cursor-pointer ${processing || !turnstileToken ? 'opacity-50 cursor-not-allowed' : ''}`}
                                 >
-                                        {/* {processing && <LoaderCircle className="h-4 w-4 animate-spin" />} */}
-                                        {success ? 'Submitted' : error ? 'Try Again' : processing ? <LoaderCircle className="h-4 w-4 animate-spin" /> : 'Submit'}
+                                    {/* {processing && <LoaderCircle className="h-4 w-4 animate-spin" />} */}
+                                    {success ? 'Submitted' : error ? 'Try Again' : processing ? <LoaderCircle className="h-4 w-4 animate-spin" /> : 'Submit'}
                                 </button>
                             )}
                         </div>
                     </form>
-
-
 
                 </div>
             </div>

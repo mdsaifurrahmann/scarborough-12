@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use App\Models\v1\VendorModel;
 use App\Services\FileUpload;
 use Illuminate\Support\Facades\Http;
+use Mews\Purifier\Facades\Purifier;
 
 class VendorApplicationsRequest extends FormRequest
 {
@@ -174,9 +175,14 @@ class VendorApplicationsRequest extends FormRequest
     {
         $validated = $this->validated();
 
+        // Sanitize all string inputs
+        $sanitized = array_map(function ($value) {
+            return Purifier::clean($value);
+        }, $validated);
+
         // Create without the file field
         $store = VendorModel::create(
-            collect($validated)->except('vendor_permit_copy')->toArray()
+            collect($sanitized)->except('vendor_permit_copy')->toArray()
         );
 
         if ($store && $store->id) {
