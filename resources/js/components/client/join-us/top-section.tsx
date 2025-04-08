@@ -7,11 +7,15 @@ const TopSection = () => {
                 <div className="mt-12 flex flex-col items-center justify-center gap-6 lg:mt-0">
                     <div className="flex flex-col items-center justify-between gap-12 lg:flex-row lg:items-start">
                         <h2 className="min-w-fit text-4xl">join us</h2>
-                        <p className="font-ysabeau px-2 text-center text-xl lg:ml-20 lg:px-0 lg:text-right">
-                            To create a world-className cultural festival celebrating Scarborough’s rich diversity and fostering connections through
-                            music, we will accept applications for artists, vendors, and sponsors for Scarborough Folk Fest 2025 soon.{' '}
-                            <span className="bg-primary inline-block rounded-sm py-px">Application will be start on april 1st 2025</span>
-                        </p>
+                        <div className="font-ysabeau px-2 text-center text-xl lg:ml-20 lg:px-0 lg:text-right">
+                            <p>Be part of a world-class cultural festival celebrating Scarborough’s rich diversity through music, art, and community! </p>
+
+                            <p>We are currently accepting <span className="bg-primary rounded-sm py-px">applications for vendors for Scarborough Folk Fest 2025.</span></p>
+                            <p>Artist and sponsor applications will open soon.</p>
+
+                            <p>Don’t miss your chance to get involved — stay tuned for updates!</p>
+
+                        </div>
                     </div>
                     <div className="mt-10">
                         <Ellipsis />

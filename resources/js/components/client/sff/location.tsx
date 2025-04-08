@@ -21,10 +21,10 @@ const Location = () => {
                             located at 1005 Brimley Rd, Scarborough, ON M1P 3E9
                         </span>
                     </div>
-                    <p className="mt-4 mb-6 text-[16px] leading-[1.2]">
-                        a scenic and historic park ideal for enjoying the Scarborough Folk Fest activities.
+                    <p className="mt-4 mb-6 text-[16px] leading-[1.2] font-ysabeau">
+                        A scenic and historic park ideal for enjoying the Scarborough Folk Fest activities.
                     </p>
-                    <p className="text-[16px] leading-[1.2]">
+                    <p className="text-[16px] leading-[1.2] font-ysabeau">
                         With lush green spaces, picnic areas, walking trails, and playgrounds, the park offers a perfect backdrop for live music,
                         dance performances, and cultural showcases during the festival.
                     </p>

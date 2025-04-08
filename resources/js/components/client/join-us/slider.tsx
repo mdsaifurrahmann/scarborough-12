@@ -39,7 +39,7 @@ const Slider = () => {
                             <div className="w-full">
                                 <a
                                     href="javascript:void(0)"
-                                    className="block w-full rounded-lg border border-white px-6 py-2 text-center hover:bg-white"
+                                    className="block w-full rounded-lg border border-white px-6 py-2 text-center bg-white hover:bg-transparent"
                                 >
                                     Apply Now
                                 </a>
@@ -62,7 +62,7 @@ const Slider = () => {
                             <div className="w-full">
                                 <a
                                     href="javascript:void(0)"
-                                    className="block w-full rounded-lg border border-white px-6 py-2 text-center hover:bg-white"
+                                    className="block w-full rounded-lg border border-white px-6 py-2 text-center bg-white hover:bg-transparent"
                                 >
                                     Apply Now
                                 </a>
@@ -85,7 +85,7 @@ const Slider = () => {
                             <div className="w-full">
                                 <Link
                                     href={route('apply-vendor')}
-                                    className="block w-full rounded-lg border border-white px-6 py-2 text-center hover:bg-white"
+                                    className="block w-full rounded-lg border border-white px-6 py-2 text-center bg-white hover:bg-transparent"
                                 >
                                     Apply Now
                                 </Link>
@@ -108,7 +108,7 @@ const Slider = () => {
                             <div className="w-full">
                                 <a
                                     href="javascript:void(0)"
-                                    className="block w-full rounded-lg border border-white px-6 py-2 text-center hover:bg-white"
+                                    className="block w-full rounded-lg border border-white px-6 py-2 text-center bg-white hover:bg-transparent"
                                 >
                                     Apply Now
                                 </a>

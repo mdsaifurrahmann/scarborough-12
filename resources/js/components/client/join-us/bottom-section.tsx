@@ -9,7 +9,7 @@ const BottomSection = () => {
                             Parampara Canada is always looking for new talents. Jobs are generally posted on the professional platforms like linkedin,
                             indeed or glassdoor. Also you can email at{' '}
                             <a href="mailto:info@parampara.ca">
-                                <span className="bg-primary rounded-sm py-px">Info@paramparaCANADA.ca</span>
+                                <span className="bg-primary rounded-sm py-px">info@paramparacanada.ca</span>
                             </a>{' '}
                             for any openings.
                         </p>

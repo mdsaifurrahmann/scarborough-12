@@ -138,7 +138,7 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                     type="text"
                     name="business_name"
                     id="business_name"
-                    className="bg-darkwhite focus:outline-primary mb-3 rounded-sm px-4 py-2"
+                    className="bg-darkwhite focus:outline-primary mb-3 rounded-sm px-4 py-2 font-ysabeau"
                     value={data.business_name}
                     onChange={(e) => setData('business_name', e.target.value)}
                     placeholder="Business Name"
@@ -152,7 +152,7 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                     type="text"
                     name="contact_person"
                     id="contact_person"
-                    className="bg-darkwhite focus:outline-primary mb-3 rounded-sm px-4 py-2"
+                    className="bg-darkwhite focus:outline-primary mb-3 rounded-sm px-4 py-2  font-ysabeau"
                     value={data.contact_person}
                     onChange={(e) => setData('contact_person', e.target.value)}
                     placeholder="Contact Person"
@@ -166,7 +166,7 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                     type="text"
                     name="phone_number"
                     id="phone_number"
-                    className="bg-darkwhite focus:outline-primary mb-3 rounded-sm px-4 py-2"
+                    className="bg-darkwhite focus:outline-primary mb-3 rounded-sm px-4 py-2  font-ysabeau"
                     value={data.phone_number}
                     onChange={(e) => setData('phone_number', e.target.value)}
                     placeholder="Phone Number"
@@ -180,7 +180,7 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                     type="email"
                     name="email"
                     id="email"
-                    className="bg-darkwhite focus:outline-primary mb-3 rounded-sm px-4 py-2"
+                    className="bg-darkwhite focus:outline-primary mb-3 rounded-sm px-4 py-2  font-ysabeau"
                     value={data.email}
                     onChange={(e) => setData('email', e.target.value)}
                     placeholder="Email"
@@ -194,7 +194,7 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                     type="text"
                     name="business_address"
                     id="business_address"
-                    className="bg-darkwhite focus:outline-primary mb-3 rounded-sm px-4 py-2"
+                    className="bg-darkwhite focus:outline-primary mb-3 rounded-sm px-4 py-2 font-ysabeau"
                     value={data.business_address}
                     onChange={(e) => setData('business_address', e.target.value)}
                     placeholder="Business Address"
@@ -206,7 +206,7 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                     type="text"
                     name="web_media"
                     id="web_media"
-                    className="bg-darkwhite focus:outline-primary mb-3 rounded-sm px-4 py-2"
+                    className="bg-darkwhite focus:outline-primary mb-3 rounded-sm px-4 py-2 font-ysabeau"
                     value={data.web_media}
                     onChange={(e) => setData('web_media', e.target.value)}
                     placeholder="https://example.com"
@@ -252,7 +252,7 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                             type="text"
                             name="vendor_other"
                             id="vendor_other"
-                            className="bg-darkwhite focus:outline-primary mb-3 rounded-sm px-4 py-2"
+                            className="bg-darkwhite focus:outline-primary mb-3 rounded-sm px-4 py-2  font-ysabeau"
                             value={data.vendor_other}
                             onChange={(e) => setData('vendor_other', e.target.value)}
                             placeholder="Footware"
@@ -271,7 +271,7 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                 </label>
                 <textarea
                     name="product_services_desc"
-                    className="bg-darkwhite focus:outline-primary mb-3 rounded-sm px-4 py-2"
+                    className="bg-darkwhite focus:outline-primary mb-3 rounded-sm px-4 py-2 font-ysabeau"
                     value={data.product_services_desc}
                     onChange={(e) => setData('product_services_desc', e.target.value)}
                 />
@@ -287,7 +287,7 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                             step={0.01}
                             name="min_price"
                             id="min_price"
-                            className="bg-darkwhite focus:outline-primary mb-3 rounded-sm px-4 py-2"
+                            className="bg-darkwhite focus:outline-primary mb-3 rounded-sm px-4 py-2 font-ysabeau"
                             value={data.min_price}
                             onChange={(e) => setData('min_price', parseFloat(e.target.value))}
                             placeholder="Minimum"
@@ -302,7 +302,7 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                             step={0.01}
                             name="max_price"
                             id="max_price"
-                            className="bg-darkwhite focus:outline-primary mb-3 rounded-sm px-4 py-2"
+                            className="bg-darkwhite focus:outline-primary mb-3 rounded-sm px-4 py-2 font-ysabeau"
                             value={data.max_price}
                             onChange={(e) => setData('max_price', parseFloat(e.target.value))}
                             placeholder="Maximum"
@@ -376,7 +376,7 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                     onChange={handleFileChange}
                     name="vendor_permit_copy"
                     id="vendor_permit_copy"
-                    className="bg-offwhite focus:outline-primary mb-3 rounded-sm border-none"
+                    className="bg-offwhite focus:outline-primary mb-3 rounded-sm border-none font-ysabeau"
                     accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
                 />
                 <InputError className="mb-3" message={errors.vendor_permit_copy} />
@@ -393,7 +393,7 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                     type="text"
                     name="space"
                     id="space"
-                    className="bg-darkwhite focus:outline-primary mb-3 rounded-sm px-4 py-2"
+                    className="bg-darkwhite focus:outline-primary mb-3 rounded-sm px-4 py-2 font-ysabeau"
                     value={data.space}
                     onChange={(e) => setData('space', e.target.value)}
                     placeholder="10’ x 10’"
@@ -425,7 +425,7 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                             type="text"
                             name="electricity_power"
                             id="electricity_power"
-                            className="bg-darkwhite focus:outline-primary mb-3 rounded-sm px-4 py-2"
+                            className="bg-darkwhite focus:outline-primary mb-3 rounded-sm px-4 py-2 font-ysabeau"
                             value={data.electricity_power}
                             onChange={(e) => setData('electricity_power', e.target.value)}
                             placeholder="220V"
@@ -477,7 +477,7 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                     type="text"
                     name="special_request"
                     id="special_request"
-                    className="bg-darkwhite focus:outline-primary mb-3 rounded-sm px-4 py-2"
+                    className="bg-darkwhite focus:outline-primary mb-3 rounded-sm px-4 py-2 font-ysabeau"
                     value={data.special_request}
                     onChange={(e) => setData('special_request', e.target.value)}
                 />
@@ -487,21 +487,21 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                     <Checkbox
                         name="agreement"
                         id="agreement"
-                        className="mb-3"
+                        className="mb-3 mt-2"
                         checked={data.agreement}
                         onCheckedChange={(checked) => setData('agreement', checked as boolean)}
                     />
 
                     <div className="grid gap-1.5 leading-none">
-                        <label htmlFor="agreement" className="peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                        <label htmlFor="agreement" className="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-ysabeau text-lg">
                             By submitting this application, I understand that acceptance as a vendor for the Scarborough Folk Fest 2025 is not
                             guaranteed. If selected, I agree to comply with all event guidelines and regulations.
                         </label>
-                        <p className="text-muted-foreground">
+                        <p className="text-muted-foreground font-ysabeau text-lg">
                             I authorize Parampara Canada to use the provided information for event-related purposes only, ensuring confidentiality and
                             not sharing it with third parties without consent, unless required by law.
                         </p>
-                        <p className="text-muted-foreground">
+                        <p className="text-muted-foreground font-ysabeau text-lg">
                             I also agree to hold Parampara Canada harmless from any liability or damages arising from my participation in the event.
                         </p>
                     </div>
@@ -531,14 +531,14 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
     const handleNext = () => {
         if (currentStep < totalSteps) {
             setCurrentStep((prev) => prev + 1);
-            window.scrollTo(0, 250);
+            window.scrollTo(0, 330);
         }
     };
 
     const handleBack = () => {
         if (currentStep > 1) {
             setCurrentStep((prev) => prev - 1);
-            window.scrollTo(0, 250);
+            window.scrollTo(0, 330);
         }
     };
 
