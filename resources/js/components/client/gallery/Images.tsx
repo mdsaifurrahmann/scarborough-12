@@ -1,6 +1,6 @@
-import CustomDropdown from "@/components/custom-dropdown";
-import { useState } from "react";
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
+import CustomDropdown from '@/components/custom-dropdown';
+import { useState } from 'react';
+import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 
 export default function Images() {
     const [selectedYear, setSelectedYear] = useState<number>(2023);
@@ -39,40 +39,34 @@ export default function Images() {
         2025: [{ title: 'Image 2', url: '2.jpg' }],
     };
 
-
-    const images = imagesByYear[selectedYear] || []
+    const images = imagesByYear[selectedYear] || [];
 
     const handleSelect = (option: { value: string; label: string } | null) => {
-        setSelectedYear(Number(option?.value))
+        setSelectedYear(Number(option?.value));
     };
 
     return (
         <section className="mb-22">
             <div className="container">
-                <div className="flex justify-between items-center mb-6 flex-col lg:flex-row">
+                <div className="mb-6 flex flex-col items-center justify-between lg:flex-row">
                     <h1 className="section-title !mb-0">GALLERY</h1>
                     <div>
-                        <CustomDropdown
-                            options={options}
-                            defaultValue={options[0]}
-                            onChange={handleSelect}
-                        />
+                        <CustomDropdown options={options} defaultValue={options[0]} onChange={handleSelect} />
                     </div>
                 </div>
-                <ResponsiveMasonry
-                    columnsCountBreakPoints={{ 0: 2, 1023: 3 }}
-                >
-                    <Masonry gutter="10px" className="bg-primary p-2 rounded-md">
+                <ResponsiveMasonry columnsCountBreakPoints={{ 0: 2, 1023: 3 }}>
+                    <Masonry gutter="10px" className="bg-primary rounded-md p-2">
                         {images.map((image, i) => (
                             <img
                                 key={i}
                                 src={`/images/gallery/${selectedYear}/${image.url}`}
-                                className="w-full block rounded-md"
+                                className="block w-full rounded-md"
                                 alt={image.title ?? ''}
                             />
                         ))}
                     </Masonry>
                 </ResponsiveMasonry>
             </div>
-        </section>)
+        </section>
+    );
 }

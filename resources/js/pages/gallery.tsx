@@ -3,7 +3,6 @@ import ClientLayout from '@/layouts/client-layout';
 import { Head } from '@inertiajs/react';
 
 function Gallery() {
-
     return (
         <>
             <Head>
