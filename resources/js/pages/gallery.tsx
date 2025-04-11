@@ -1,3 +1,4 @@
+import Images from '@/components/client/gallery/Images';
 import ClientLayout from '@/layouts/client-layout';
 import { Head } from '@inertiajs/react';
 
@@ -8,6 +9,7 @@ function Gallery() {
             <Head>
                 <title>Gallery</title>
             </Head>
+            <Images />
         </>
     );
 }
