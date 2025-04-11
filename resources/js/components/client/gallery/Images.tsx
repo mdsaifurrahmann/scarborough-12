@@ -1,25 +1,36 @@
 import CustomDropdown from "@/components/custom-dropdown";
+import { useState } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
 
 export default function Images() {
-    const images = [
-        "https://picsum.photos/200/300?image=1050",
-        "https://picsum.photos/300/300?image=206",
-        "https://picsum.photos/250/350?image=1024",
-        "https://picsum.photos/300/200?image=1027",
-        "https://picsum.photos/275/325?image=1035",
-        "https://picsum.photos/200/400?image=1041",
-        "https://picsum.photos/350/250?image=1043",
-        "https://picsum.photos/300/500?image=1049",
-        "https://picsum.photos/400/300?image=1052",
-        "https://picsum.photos/250/250?image=1055",
-    ]
+    const [selectedYear, setSelectedYear] = useState<number>(2023);
 
     const options = [
-        { value: 'sff2024', label: '#SFF2024' },
-        { value: 'sff2023', label: '#SFF2023' },
-        { value: 'sff2022', label: '#SFF2022' },
+        { value: '2023', label: '#SFF2023' },
+        { value: '2024', label: '#SFF2024' },
+        { value: '2025', label: '#SFF2025' },
     ];
+
+    type Image = {
+        title: string;
+        url: string;
+    };
+
+    const imagesByYear: Record<number, Image[]> = {
+        2020: [
+            { title: 'Image 1', url: 'img1.jpg' },
+            { title: 'Image 2', url: 'img2.jpg' },
+            { title: 'Image 3', url: 'img3.jpg' },
+            { title: 'Image 4', url: 'img4.jpg' },
+        ],
+        2021: [{ title: 'Image 1', url: 'img1.jpg' }],
+        2022: [{ title: 'Image 2', url: 'img2.jpg' }],
+        2023: [{ title: 'Image 3', url: 'img3.jpg' }],
+        2024: [{ title: 'Image 4', url: 'img4.jpg' }],
+    };
+
+
+    const images = imagesByYear[selectedYear] || []
 
     const handleSelect = (option: { value: string; label: string } | null) => {
         console.log('Selected option:', option);
@@ -45,7 +56,7 @@ export default function Images() {
                         {images.map((image, i) => (
                             <img
                                 key={i}
-                                src={image}
+                                src={image.url}
                                 className="w-full block rounded-md"
                                 alt={`Gallery ${i}`}
                             />
