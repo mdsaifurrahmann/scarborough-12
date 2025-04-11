@@ -2,12 +2,11 @@
 
 namespace App\Http\Requests\v1;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Mews\Purifier\Facades\Purifier;
 use App\Models\v1\ArtistModel;
-use Illuminate\Support\Facades\Http;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Http;
+use Mews\Purifier\Facades\Purifier;
 
 class ArtistRequest extends FormRequest
 {
@@ -74,7 +73,7 @@ class ArtistRequest extends FormRequest
             'sound_check' => [
                 'nullable',
                 'boolean',
-                'in:0,1,true,false'
+                'in:0,1,true,false',
             ],
             'artist_bio' => [
                 'nullable',
@@ -99,7 +98,7 @@ class ArtistRequest extends FormRequest
             'media_interview' => [
                 'required',
                 'boolean',
-                'in:0,1,true,false'
+                'in:0,1,true,false',
             ],
             'signature' => [
                 'required',
@@ -117,7 +116,7 @@ class ArtistRequest extends FormRequest
                     $result = $response->json();
 
                     if (! $result['success']) {
-                        $fail('Turnstile verification failed: ' . implode(', ', $result['error-codes'] ?? ['Unknown error']));
+                        $fail('Turnstile verification failed: '.implode(', ', $result['error-codes'] ?? ['Unknown error']));
                     }
                 },
             ],
@@ -182,7 +181,6 @@ class ArtistRequest extends FormRequest
         ];
     }
 
-
     public function storeApplication()
     {
         $validatedData = $this->validated();
@@ -199,7 +197,7 @@ class ArtistRequest extends FormRequest
             $store = ArtistModel::create($sanitized);
             DB::commit();
         } catch (\Exception $e) {
-            Log::error('Error creating artist application from Request ' . $e->getMessage());
+            Log::error('Error creating artist application from Request '.$e->getMessage());
             DB::rollBack();
         }
     }

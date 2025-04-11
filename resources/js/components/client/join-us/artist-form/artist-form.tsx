@@ -4,7 +4,6 @@ import { LoaderCircle } from 'lucide-react';
 import { FormEventHandler, useRef, useState } from 'react';
 
 import InputError from '@/components/input-error';
-import { Checkbox } from '@/components/ui/checkbox';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { toast } from 'sonner';
 
@@ -74,7 +73,6 @@ const ArtistForm = ({ success, error }: ArtistFormProps) => {
     });
 
     const steps = [
-
         <>
             <div className="flex flex-col">
                 <label htmlFor="artist_name">
@@ -105,9 +103,6 @@ const ArtistForm = ({ success, error }: ArtistFormProps) => {
                 />
                 <InputError className="mb-3" message={errors.contact_person} />
 
-
-
-
                 <label htmlFor="phone">
                     Phone Number <span className="text-red-500">*</span>
                 </label>
@@ -136,8 +131,6 @@ const ArtistForm = ({ success, error }: ArtistFormProps) => {
                 />
                 <InputError className="mb-3" message={errors.email} />
 
-
-
                 <label htmlFor="web_media">Website/Social Media Links (If applicable)</label>
                 <input
                     type="text"
@@ -164,12 +157,17 @@ const ArtistForm = ({ success, error }: ArtistFormProps) => {
                 />
                 <InputError className="mb-3" message={errors.city} />
 
-
                 <label htmlFor="province">
                     Province <span className="text-red-500">*</span>
                 </label>
 
-                <select name="province" id="province" className='bg-darkwhite focus:outline-primary font-ysabeau mb-3 rounded-sm px-4 py-2' value={data.province} onChange={e => setData('province', e.target.value)}>
+                <select
+                    name="province"
+                    id="province"
+                    className="bg-darkwhite focus:outline-primary font-ysabeau mb-3 rounded-sm px-4 py-2"
+                    value={data.province}
+                    onChange={(e) => setData('province', e.target.value)}
+                >
                     <option value="">Select Province</option>
                     <option value="Alberta">Alberta</option>
                     <option value="British Columbia">British Columbia</option>
@@ -184,8 +182,6 @@ const ArtistForm = ({ success, error }: ArtistFormProps) => {
                 </select>
 
                 <InputError className="mb-3" message={errors.province} />
-
-
             </div>
         </>,
 
@@ -196,34 +192,51 @@ const ArtistForm = ({ success, error }: ArtistFormProps) => {
                     Genre/Style of Music or Performance
                     <span className="text-red-500"> * </span>
                 </label>
-                <input type="text" className="bg-darkwhite focus:outline-primary font-ysabeau mb-3 rounded-sm px-4 py-2" value={data.genre_performance} onChange={(e) => setData('genre_performance', e.target.value)} />
+                <input
+                    type="text"
+                    className="bg-darkwhite focus:outline-primary font-ysabeau mb-3 rounded-sm px-4 py-2"
+                    value={data.genre_performance}
+                    onChange={(e) => setData('genre_performance', e.target.value)}
+                />
                 <InputError className="mb-3" message={errors.genre_performance} />
 
                 <label htmlFor="no_performers">
                     Number of Performers:
                     <span className="text-red-500"> * </span>
                 </label>
-                <input type="number" className="bg-darkwhite focus:outline-primary font-ysabeau mb-3 rounded-sm px-4 py-2" value={data.no_performers} onChange={(e) => setData('no_performers', parseInt(e.target.value))} />
+                <input
+                    type="number"
+                    className="bg-darkwhite focus:outline-primary font-ysabeau mb-3 rounded-sm px-4 py-2"
+                    value={data.no_performers}
+                    onChange={(e) => setData('no_performers', parseInt(e.target.value))}
+                />
                 <InputError className="mb-3" message={errors.no_performers} />
 
                 <label htmlFor="duration">
                     Duration of Performance (in minutes):
                     <span className="text-red-500"> * </span>
                 </label>
-                <input type="number" className="bg-darkwhite focus:outline-primary font-ysabeau mb-3 rounded-sm px-4 py-2" value={data.duration} onChange={(e) => setData('duration', e.target.value)} />
+                <input
+                    type="number"
+                    className="bg-darkwhite focus:outline-primary font-ysabeau mb-3 rounded-sm px-4 py-2"
+                    value={data.duration}
+                    onChange={(e) => setData('duration', e.target.value)}
+                />
                 <InputError className="mb-3" message={errors.duration} />
 
                 <label htmlFor="technical_requirements">
                     Technical Requirements (e.g., sound, lighting, instruments):
                     <span className="text-red-500"> * </span>
                 </label>
-                <input type="text" className="bg-darkwhite focus:outline-primary font-ysabeau mb-3 rounded-sm px-4 py-2" value={data.technical_requirements} onChange={(e) => setData('technical_requirements', e.target.value)} />
+                <input
+                    type="text"
+                    className="bg-darkwhite focus:outline-primary font-ysabeau mb-3 rounded-sm px-4 py-2"
+                    value={data.technical_requirements}
+                    onChange={(e) => setData('technical_requirements', e.target.value)}
+                />
                 <InputError className="mb-3" message={errors.technical_requirements} />
 
-
-                <label htmlFor="sound_check">
-                    Do you require a soundcheck? (Applicable for Musicians or Bands)
-                </label>
+                <label htmlFor="sound_check">Do you require a soundcheck? (Applicable for Musicians or Bands)</label>
 
                 <RadioGroup
                     className="mt-2 ml-3"
@@ -257,9 +270,7 @@ const ArtistForm = ({ success, error }: ArtistFormProps) => {
                 />
                 <InputError className="mb-3" message={errors.artist_bio} />
 
-                <label htmlFor="prev_performances">
-                    Previous Performance Experience (venues, festivals, etc.):
-                </label>
+                <label htmlFor="prev_performances">Previous Performance Experience (venues, festivals, etc.):</label>
                 <textarea
                     name="prev_performances"
                     id="prev_performances"
@@ -272,13 +283,12 @@ const ArtistForm = ({ success, error }: ArtistFormProps) => {
 
                 <h5>Links to previous performance</h5>
                 <p>
-                    Providing links to your portfolio or past performances allows us to better understand your style, experience, and unique contributions as an artist. Sharing your previous work helps showcase your talent and can significantly enhance your chances of being selected for Scarborough Folk Fest 2025.
+                    Providing links to your portfolio or past performances allows us to better understand your style, experience, and unique
+                    contributions as an artist. Sharing your previous work helps showcase your talent and can significantly enhance your chances of
+                    being selected for Scarborough Folk Fest 2025.
                 </p>
 
-
-                <label htmlFor="perf_link_1">
-                    Link 1:
-                </label>
+                <label htmlFor="perf_link_1">Link 1:</label>
                 <input
                     type="url"
                     name="perf_link_1"
@@ -290,9 +300,7 @@ const ArtistForm = ({ success, error }: ArtistFormProps) => {
                 />
                 <InputError className="mb-3" message={errors.perf_link_1} />
 
-                <label htmlFor="perf_link_2">
-                    Link 2:
-                </label>
+                <label htmlFor="perf_link_2">Link 2:</label>
                 <input
                     type="url"
                     name="perf_link_2"
@@ -304,10 +312,7 @@ const ArtistForm = ({ success, error }: ArtistFormProps) => {
                 />
                 <InputError className="mb-3" message={errors.perf_link_2} />
 
-
-                <label htmlFor="perf_link_3">
-                    Link 3:
-                </label>
+                <label htmlFor="perf_link_3">Link 3:</label>
                 <input
                     type="url"
                     name="perf_link_3"
@@ -323,9 +328,7 @@ const ArtistForm = ({ success, error }: ArtistFormProps) => {
 
         <>
             <div className="flex flex-col">
-                <label htmlFor="media_interview">
-                    Are you interested in participating in media interviews or promotional campaigns?
-                </label>
+                <label htmlFor="media_interview">Are you interested in participating in media interviews or promotional campaigns?</label>
 
                 <RadioGroup
                     className="mt-2 ml-3"

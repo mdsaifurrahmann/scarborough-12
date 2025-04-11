@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('artists_application', function (Blueprint $table) {
-            
+
             $table->id();
-            
+
             $table->string('artist_name');
             $table->string('contact_person')->nullable();
             $table->string('phone');
@@ -36,11 +36,10 @@ return new class extends Migration
             $table->string('perf_link_3')->nullable();
 
             $table->boolean('media_interview');
-            
-            $table->string('signature');
-            
-            $table->timestamps();   
 
+            $table->string('signature');
+
+            $table->timestamps();
 
         });
     }

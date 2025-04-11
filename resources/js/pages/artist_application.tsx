@@ -1,9 +1,9 @@
 import ClientLayout from '@/layouts/client-layout';
 import { Head, usePage } from '@inertiajs/react';
 
+import ArtistForm from '@/components/client/join-us/artist-form/artist-form';
 import BottomSection from '@/components/client/join-us/bottom-section';
 import TopSection from '@/components/client/join-us/top-section';
-import ArtistForm from '@/components/client/join-us/artist-form/artist-form';
 import { Toaster } from '@/components/ui/sonner';
 
 function ArtistApplication() {

@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\v1\ArtistController;
 use App\Http\Controllers\v1\ContactForm;
 use App\Http\Controllers\v1\SponsorController;
 use App\Http\Controllers\v1\VendorApplications;
-use App\Http\Controllers\v1\ArtistController;
 use Illuminate\Support\Facades\Route;
 
 // Contact Form
