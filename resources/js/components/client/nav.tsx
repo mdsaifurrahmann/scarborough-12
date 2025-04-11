@@ -21,7 +21,7 @@ const navItems: NavItem[] = [
     },
     {
         title: 'gallery',
-        url: '',
+        url: '/gallery',
     },
     {
         title: 'contact',
