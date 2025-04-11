@@ -38,7 +38,7 @@ const Slider = () => {
                             </div>
                             <div className="w-full">
                                 <a
-                                    href="javascript:void(0)"
+                                    href={route('apply-artist')}
                                     className="block w-full rounded-lg border border-white bg-white px-6 py-2 text-center hover:bg-transparent"
                                 >
                                     Apply Now

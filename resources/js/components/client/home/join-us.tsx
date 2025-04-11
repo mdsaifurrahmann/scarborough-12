@@ -52,7 +52,7 @@ const JoinUs = () => {
                             </SwiperSlide>
                             <SwiperSlide>
                                 <h3 className="title">Artist</h3>
-                                <Link href={route('join-us')}>
+                                <Link href={route('apply-artist')}>
                                     <div className="card">
                                         <p className="font-ysabeau text-xl leading-[1.2]">
                                             Showcase your talent on a vibrant stage. Apply now to perform and share your art with the community!
