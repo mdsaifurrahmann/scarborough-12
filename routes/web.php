@@ -13,6 +13,7 @@ Route::get('contact', [PublicRoutes::class, 'contact'])->name('contact');
 Route::get('join-us', [PublicRoutes::class, 'joinUs'])->name('join-us');
 Route::get('join-us/apply-vendor', [PublicRoutes::class, 'applyVendor'])->name('apply-vendor');
 Route::get('join-us/apply-sponsor', [PublicRoutes::class, 'applySponsor'])->name('apply-sponsor');
+Route::get('gallery', [PublicRoutes::class, 'gallery'])->name('gallery');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
