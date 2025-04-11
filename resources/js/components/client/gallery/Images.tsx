@@ -1,5 +1,5 @@
 import CustomDropdown from "@/components/custom-dropdown";
-import Masonry from "react-responsive-masonry"
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
 
 export default function Images() {
     const images = [
@@ -28,7 +28,7 @@ export default function Images() {
     return (
         <section className="mb-22">
             <div className="container">
-                <div className="flex justify-between items-center mb-6">
+                <div className="flex justify-between items-center mb-6 flex-col lg:flex-row">
                     <h1 className="section-title !mb-0">GALLERY</h1>
                     <div>
                         <CustomDropdown
@@ -38,15 +38,20 @@ export default function Images() {
                         />
                     </div>
                 </div>
-                <Masonry columnsCount={3} gutter="10px" className="bg-primary p-2 rounded-md">
-                    {images.map((image, i) => (
-                        <img
-                            key={i}
-                            src={image}
-                            className="w-full block rounded-md"
-                        />
-                    ))}
-                </Masonry>
+                <ResponsiveMasonry
+                    columnsCountBreakPoints={{ 0: 2, 1023: 3 }}
+                >
+                    <Masonry gutter="10px" className="bg-primary p-2 rounded-md">
+                        {images.map((image, i) => (
+                            <img
+                                key={i}
+                                src={image}
+                                className="w-full block rounded-md"
+                                alt={`Gallery ${i}`}
+                            />
+                        ))}
+                    </Masonry>
+                </ResponsiveMasonry>
             </div>
         </section>)
 }
