@@ -1,9 +1,18 @@
+import ClientLayout from '@/layouts/client-layout';
 import { Head } from '@inertiajs/react';
 
-export default function Gallery() {
-    return (<>
-        <Head>
-            <title>Gallery</title>
-        </Head>
-    </>)
+function Gallery() {
+
+    return (
+        <>
+            <Head>
+                <title>Gallery</title>
+            </Head>
+        </>
+    );
 }
+
+// Attach the persistent layout to the page component.
+Gallery.layout = (page: React.ReactNode) => <ClientLayout>{page}</ClientLayout>;
+
+export default Gallery;
