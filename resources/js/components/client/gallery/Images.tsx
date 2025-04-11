@@ -12,28 +12,38 @@ export default function Images() {
     ];
 
     type Image = {
-        title: string;
+        title: string | null;
         url: string;
     };
 
     const imagesByYear: Record<number, Image[]> = {
-        2020: [
-            { title: 'Image 1', url: 'img1.jpg' },
-            { title: 'Image 2', url: 'img2.jpg' },
-            { title: 'Image 3', url: 'img3.jpg' },
-            { title: 'Image 4', url: 'img4.jpg' },
+        2023: [
+            { title: 'Image 1', url: '1.jpg' },
+            { title: 'Image 2', url: '2.jpg' },
+            { title: 'Image 3', url: '3.jpg' },
+            { title: 'Image 4', url: '4.jpg' },
+            { title: null, url: '5.jpg' },
+            { title: null, url: '7.jpg' },
+            { title: null, url: '8.jpg' },
+            { title: null, url: '9.jpg' },
+            { title: null, url: '10.jpg' },
         ],
-        2021: [{ title: 'Image 1', url: 'img1.jpg' }],
-        2022: [{ title: 'Image 2', url: 'img2.jpg' }],
-        2023: [{ title: 'Image 3', url: 'img3.jpg' }],
-        2024: [{ title: 'Image 4', url: 'img4.jpg' }],
+        2024: [
+            { title: 'Image 1', url: '3.jpg' },
+            { title: null, url: '5.jpg' },
+            { title: null, url: '7.jpg' },
+            { title: null, url: '8.jpg' },
+            { title: null, url: '9.jpg' },
+            { title: null, url: '10.jpg' },
+        ],
+        2025: [{ title: 'Image 2', url: '2.jpg' }],
     };
 
 
     const images = imagesByYear[selectedYear] || []
 
     const handleSelect = (option: { value: string; label: string } | null) => {
-        console.log('Selected option:', option);
+        setSelectedYear(Number(option?.value))
     };
 
     return (
@@ -56,9 +66,9 @@ export default function Images() {
                         {images.map((image, i) => (
                             <img
                                 key={i}
-                                src={image.url}
+                                src={`/images/gallery/${selectedYear}/${image.url}`}
                                 className="w-full block rounded-md"
-                                alt={`Gallery ${i}`}
+                                alt={image.title ?? ''}
                             />
                         ))}
                     </Masonry>
