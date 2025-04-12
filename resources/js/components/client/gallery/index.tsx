@@ -86,7 +86,6 @@ export default function Images() {
             { title: null, url: '23.jpg' },
             { title: null, url: '24.jpg' },
             { title: null, url: '25.jpg' },
-
         ],
     };
 
