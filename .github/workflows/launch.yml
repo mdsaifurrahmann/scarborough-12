@@ -44,7 +44,7 @@ jobs:
      with:
       name: app-build
    - name: Upload
-     uses: appleboy/scp-action@0.1.7
+     uses: appleboy/scp-action@v0.1.7
      with:
       host: ${{ SECRETS.SERVER_HOST }}
       port: ${{ SECRETS.SERVER_PORT }}
@@ -53,7 +53,7 @@ jobs:
       source: ${{github.sha}}.tar.gz
       target: domains/scarboroughfolkfest.com/public_html
    - name: Extract archive and create directory
-     uses: appleboy/ssh-action@master
+     uses: appleboy/ssh-action@v1
      env:
       GITHUB_SHA: ${{ github.sha }}
      with:
@@ -73,7 +73,7 @@ jobs:
    - prepare-release-on-server
   steps:
    - name: Active Release
-     uses: appleboy/ssh-action@master
+     uses: appleboy/ssh-action@v1
      env:
       GITHUB_SHA: ${{github.sha}}
       BASE_PATH: public_html
@@ -99,7 +99,7 @@ jobs:
    - active-release
   steps:
    - name: Migration Init
-     uses: appleboy/ssh-action@master
+     uses: appleboy/ssh-action@v1
      env:
       BASE_PATH: domains/scarboroughfolkfest.com/public_html
       MIGRATE: ${{ SECRETS.MIGRATE }}
@@ -123,7 +123,7 @@ jobs:
    - migrating-db
   steps:
    - name: Clean up server junk
-     uses: appleboy/ssh-action@master
+     uses: appleboy/ssh-action@v1
      with:
       host: ${{ SECRETS.SERVER_HOST }}
       port: ${{ SECRETS.SERVER_PORT }}
