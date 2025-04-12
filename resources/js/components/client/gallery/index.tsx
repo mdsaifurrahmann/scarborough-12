@@ -6,14 +6,14 @@ import 'yet-another-react-lightbox/styles.css';
 import './index.css';
 
 export default function Images() {
-    const [selectedYear, setSelectedYear] = useState<number>(2023);
+    const [selectedYear, setSelectedYear] = useState<number>(2022);
     const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
     const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
     const options = [
+        { value: '2022', label: '#SFF2022' },
         { value: '2023', label: '#SFF2023' },
         { value: '2024', label: '#SFF2024' },
-        { value: '2025', label: '#SFF2025' },
     ];
 
     type Image = {
@@ -22,26 +22,72 @@ export default function Images() {
     };
 
     const imagesByYear: Record<number, Image[]> = {
+        2022: [
+            { title: null, url: '1.JPG' },
+            { title: null, url: '2.JPG' },
+            { title: null, url: '3.JPG' },
+            { title: null, url: '4.JPG' },
+            { title: null, url: '5.JPG' },
+            { title: null, url: '7.JPG' },
+            { title: null, url: '8.JPG' },
+            { title: null, url: '9.JPG' },
+            { title: null, url: '10.JPG' },
+            { title: null, url: '11.JPG' },
+            { title: null, url: '12.JPG' },
+            { title: null, url: '13.JPG' },
+            { title: null, url: '14.JPG' },
+            { title: null, url: '15.JPG' },
+            { title: null, url: '16.JPG' },
+        ],
         2023: [
-            { title: 'Image 1', url: '1.jpg' },
-            { title: 'Image 2', url: '2.jpg' },
-            { title: 'Image 3', url: '3.jpg' },
-            { title: 'Image 4', url: '4.jpg' },
-            { title: null, url: '5.jpg' },
-            { title: null, url: '7.jpg' },
-            { title: null, url: '8.jpg' },
-            { title: null, url: '9.jpg' },
-            { title: null, url: '10.jpg' },
+            { title: null, url: '1.png' },
+            { title: null, url: '2.png' },
+            { title: null, url: '3.png' },
+            { title: null, url: '4.png' },
+            { title: null, url: '5.png' },
+            { title: null, url: '7.png' },
+            { title: null, url: '8.png' },
+            { title: null, url: '9.png' },
+            { title: null, url: '10.png' },
+            { title: null, url: '11.png' },
+            { title: null, url: '12.png' },
+            { title: null, url: '13.png' },
+            { title: null, url: '14.png' },
+            { title: null, url: '15.png' },
+            { title: null, url: '16.png' },
+            { title: null, url: '17.png' },
+            { title: null, url: '18.png' },
+            { title: null, url: '19.png' },
+            { title: null, url: '20.png' },
         ],
         2024: [
-            { title: 'Image 1', url: '3.jpg' },
+            { title: null, url: '1.jpg' },
+            { title: null, url: '2.jpg' },
+            { title: null, url: '3.jpg' },
+            { title: null, url: '4.jpg' },
             { title: null, url: '5.jpg' },
+            { title: null, url: '6.jpg' },
             { title: null, url: '7.jpg' },
             { title: null, url: '8.jpg' },
             { title: null, url: '9.jpg' },
             { title: null, url: '10.jpg' },
+            { title: null, url: '11.jpg' },
+            { title: null, url: '12.jpg' },
+            { title: null, url: '13.jpg' },
+            { title: null, url: '14.jpg' },
+            { title: null, url: '15.jpg' },
+            { title: null, url: '16.jpg' },
+            { title: null, url: '17.jpg' },
+            { title: null, url: '18.jpg' },
+            { title: null, url: '19.jpg' },
+            { title: null, url: '20.jpg' },
+            { title: null, url: '21.jpg' },
+            { title: null, url: '22.jpg' },
+            { title: null, url: '23.jpg' },
+            { title: null, url: '24.jpg' },
+            { title: null, url: '25.jpg' },
+
         ],
-        2025: [{ title: 'Image 2', url: '2.jpg' }],
     };
 
     const images = imagesByYear[selectedYear] || [];
@@ -83,6 +129,7 @@ export default function Images() {
                                 alt={image.title ?? ''}
                                 style={{ animationDelay: `${i * 100}ms`, animationFillMode: 'both' }}
                                 onClick={() => setLightboxIndex(i)}
+                                loading="lazy"
                             />
                         ))}
                     </Masonry>

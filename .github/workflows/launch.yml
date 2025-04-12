@@ -1,0 +1,133 @@
+name: Deploy Application
+on:
+ push:
+  branches:
+   - fly
+jobs:
+ create-deployment-environment:
+  name: Create Deployment Environment
+  runs-on: ubuntu-latest
+  steps:
+   - uses: actions/checkout@v3
+   - name: Setup Node
+     uses: actions/setup-node@v4
+     with:
+      node-version: 20
+      cache: npm
+   - name: Compile Assets
+     run: |
+      npm ci
+      npm run build
+   - name: Configure PHP
+     uses: shivammathur/setup-php@master
+     with:
+      php-version: 8.3
+   - name: Configure Composer
+     run: >
+      composer install --optimize-autoloader --no-dev --no-interaction
+      --prefer-dist
+   - name: Create Deployment archive
+     env:
+      GITHUB_SHA: ${{ github.sha }}
+     run: tar -czf "${GITHUB_SHA}".tar.gz --exclude=*.git --exclude=node_modules *
+   - name: Store archive for distribution
+     uses: actions/upload-artifact@v3
+     with:
+      name: app-build
+      path: ${{github.sha}}.tar.gz
+ prepare-release-on-server:
+  name: Prepare release on server
+  runs-on: ubuntu-latest
+  needs: create-deployment-environment
+  steps:
+   - uses: actions/download-artifact@v3
+     with:
+      name: app-build
+   - name: Upload
+     uses: appleboy/scp-action@master
+     with:
+      host: ${{ SECRETS.SERVER_HOST }}
+      port: ${{ SECRETS.SERVER_PORT }}
+      username: ${{ SECRETS.SERVER_USERNAME }}
+      password: ${{ SECRETS.SERVER_PASSWORD }}
+      source: ${{github.sha}}.tar.gz
+      target: domains/scarboroughfolkfest.com/public_html
+   - name: Extract archive and create directory
+     uses: appleboy/ssh-action@master
+     env:
+      GITHUB_SHA: ${{ github.sha }}
+     with:
+      host: ${{ SECRETS.SERVER_HOST }}
+      port: ${{ SECRETS.SERVER_PORT }}
+      username: ${{ SECRETS.SERVER_USERNAME }}
+      password: ${{ SECRETS.SERVER_PASSWORD }}
+      envs: GITHUB_SHA
+      script: >
+       tar xzf domains/scarboroughfolkfest.com/public_html/${GITHUB_SHA}.tar.gz
+       -C "domains/scarboroughfolkfest.com/public_html"
+ active-release:
+  name: Codebumble Server 2Y - Active Release
+  runs-on: ubuntu-latest
+  needs:
+   - create-deployment-environment
+   - prepare-release-on-server
+  steps:
+   - name: Active Release
+     uses: appleboy/ssh-action@master
+     env:
+      GITHUB_SHA: ${{github.sha}}
+      BASE_PATH: public_html
+      PROJECT_ENV: ${{ SECRETS.PROJECT_ENV }}
+      XKEY: ${{ SECRETS.KEY_GEN }}
+     with:
+      host: ${{ SECRETS.SERVER_HOST }}
+      port: ${{ SECRETS.SERVER_PORT }}
+      username: ${{ SECRETS.SERVER_USERNAME }}
+      password: ${{ SECRETS.SERVER_PASSWORD }}
+      envs: GITHUB_SHA,BASE_PATH,PROJECT_ENV,XKEY
+      script: |
+       echo ${GITHUB_SHA}
+       printf "%s" "$PROJECT_ENV" > "${BASE_PATH}/.env"
+       printf "%s" "${GITHUB_SHA}" > "${BASE_PATH}/${GITHUB_SHA}.txt"
+       cd ${BASE_PATH} && ${XKEY}
+ migrating-db:
+  name: Configure DB & Cache
+  runs-on: ubuntu-latest
+  needs:
+   - create-deployment-environment
+   - prepare-release-on-server
+   - active-release
+  steps:
+   - name: Migration Init
+     uses: appleboy/ssh-action@master
+     env:
+      BASE_PATH: domains/scarboroughfolkfest.com/public_html
+      MIGRATE: ${{ SECRETS.MIGRATE }}
+      ROUTE_CACHE: ${{ SECRETS.ROUTE_CACHE }}
+      VIEW_CACHE: ${{ SECRETS.VIEW_CACHE }}
+     with:
+      envs: BASE_PATH,ROUTE_CACHE,VIEW_CACHE
+      host: ${{ SECRETS.SERVER_HOST }}
+      port: ${{ SECRETS.SERVER_PORT }}
+      username: ${{ SECRETS.SERVER_USERNAME }}
+      password: ${{ SECRETS.SERVER_PASSWORD }}
+      script: |
+       cd ${BASE_PATH} && ${MIGRATE} && ${ROUTE_CACHE} && ${VIEW_CACHE}
+ clean-up:
+  name: Cleaning Up Artifacts
+  runs-on: ubuntu-latest
+  needs:
+   - create-deployment-environment
+   - prepare-release-on-server
+   - active-release
+   - migrating-db
+  steps:
+   - name: Clean up server junk
+     uses: appleboy/ssh-action@master
+     with:
+      host: ${{ SECRETS.SERVER_HOST }}
+      port: ${{ SECRETS.SERVER_PORT }}
+      username: ${{ SECRETS.SERVER_USERNAME }}
+      password: ${{ SECRETS.SERVER_PASSWORD }}
+      script: >
+       rm -rf domains/scarboroughfolkfest.com/public_html/${{github.sha}}.tar.gz
