@@ -1,11 +1,5 @@
-import Select, {
-    components,
-    DropdownIndicatorProps,
-    StylesConfig,
-    ValueContainerProps,
-    SingleValue,
-} from 'react-select';
 import React from 'react';
+import Select, { components, DropdownIndicatorProps, SingleValue, StylesConfig, ValueContainerProps } from 'react-select';
 
 type OptionType = {
     value: string;
@@ -95,24 +89,14 @@ const customStyles: StylesConfig<OptionType, false> = {
     }),
     option: (base, state) => ({
         ...base,
-        backgroundColor: state.isSelected
-            ? '#FFC107'
-            : state.isFocused
-                ? '#FFECB3'
-                : 'white',
+        backgroundColor: state.isSelected ? '#FFC107' : state.isFocused ? '#FFECB3' : 'white',
         color: 'black',
         cursor: 'pointer',
         padding: '10px 15px',
     }),
 };
 
-const CustomDropdown: React.FC<CustomDropdownProps> = ({
-    options,
-    defaultValue,
-    onChange,
-    isSearchable = false,
-    isDisabled = false,
-}) => {
+const CustomDropdown: React.FC<CustomDropdownProps> = ({ options, defaultValue, onChange, isSearchable = false, isDisabled = false }) => {
     return (
         <Select<OptionType, false>
             options={options}

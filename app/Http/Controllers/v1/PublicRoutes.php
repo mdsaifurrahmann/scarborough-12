@@ -74,13 +74,23 @@ class PublicRoutes extends Controller
         ]);
     }
 
+    public function applyArtist(Request $request)
+    {
+        return Inertia::render('artist_application', [
+            'title' => 'Artist Application',
+            'success' => $request->session()->get('success'),
+            'error' => $request->session()->get('error'),
+            'requiresChallenge' => $request->session()->get('requiresChallenge'),
+        ]);
+    }
+
     public function gallery(Request $request)
     {
         return Inertia::render('gallery', [
             'title' => 'Gallery',
-            'success' => $request->session()->get('success'),
-            'error' => $request->session()->get('error'),
-            'requiresChallenge' => $request->session()->get('requiresChallenge'),
+            // 'success' => $request->session()->get('success'),
+            // 'error' => $request->session()->get('error'),
+            // 'requiresChallenge' => $request->session()->get('requiresChallenge'),
         ]);
     }
 }
