@@ -1,11 +1,14 @@
 import CustomDropdown from "@/components/custom-dropdown";
 import { useEffect, useRef, useState } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
+import Lightbox from "yet-another-react-lightbox"
+import "yet-another-react-lightbox/styles.css"
 import './index.css'
 
 export default function Images() {
     const [selectedYear, setSelectedYear] = useState<number>(2023);
     const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
+    const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
     const options = [
         { value: '2023', label: '#SFF2023' },
@@ -83,13 +86,25 @@ export default function Images() {
                                     imageRefs.current[i] = el;
                                   }}
                                 src={`/images/gallery/${selectedYear}/${image.url}`}
-                                className="w-full block rounded-md fade-in"
+                                className="w-full block rounded-md fade-in cursor-pointer"
                                 alt={image.title ?? ''}
                                 style={{ animationDelay: `${i * 100}ms`, animationFillMode: 'both' }}
+                                onClick={() => setLightboxIndex(i)}
                             />
                         ))}
                     </Masonry>
                 </ResponsiveMasonry>
+                {lightboxIndex !== null && (
+                    <Lightbox
+                        open={lightboxIndex !== null}
+                        index={lightboxIndex}
+                        close={() => setLightboxIndex(null)}
+                        slides={images.map((img) => ({
+                            src: `/images/gallery/${selectedYear}/${img.url}`,
+                            alt: img.title ?? '',
+                        }))}
+                    />
+                )}
             </div>
         </section>)
 }
