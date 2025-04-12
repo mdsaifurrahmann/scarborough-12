@@ -1,4 +1,4 @@
-import Images from '@/components/client/gallery/Images';
+import Images from '@/components/client/gallery';
 import ClientLayout from '@/layouts/client-layout';
 import { Head } from '@inertiajs/react';
 

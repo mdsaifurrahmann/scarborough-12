@@ -1,9 +1,11 @@
 import CustomDropdown from "@/components/custom-dropdown";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
+import './index.css'
 
 export default function Images() {
     const [selectedYear, setSelectedYear] = useState<number>(2023);
+    const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
 
     const options = [
         { value: '2023', label: '#SFF2023' },
@@ -46,6 +48,17 @@ export default function Images() {
         setSelectedYear(Number(option?.value))
     };
 
+    function resetAnimation(el: HTMLElement | null) {
+        if (!el) return;
+        el.classList.remove("fade-in");
+        void el.offsetWidth;
+        el.classList.add("fade-in");
+      }
+    
+  useEffect(() => {
+    imageRefs.current.forEach((el) => resetAnimation(el));
+  }, [selectedYear]);
+
     return (
         <section className="mb-22">
             <div className="container">
@@ -66,9 +79,13 @@ export default function Images() {
                         {images.map((image, i) => (
                             <img
                                 key={i}
+                                ref={(el) => {
+                                    imageRefs.current[i] = el;
+                                  }}
                                 src={`/images/gallery/${selectedYear}/${image.url}`}
-                                className="w-full block rounded-md"
+                                className="w-full block rounded-md fade-in"
                                 alt={image.title ?? ''}
+                                style={{ animationDelay: `${i * 100}ms`, animationFillMode: 'both' }}
                             />
                         ))}
                     </Masonry>

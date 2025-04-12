@@ -34,6 +34,7 @@ const DropdownIndicator = (props: DropdownIndicatorProps<OptionType>) => (
                 height: '100%',
                 cursor: 'pointer',
                 fontWeight: 'bold',
+                marginLeft: '-12px',
             }}
         >
             &darr;
