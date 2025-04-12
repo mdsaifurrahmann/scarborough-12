@@ -1,14 +1,14 @@
-import CustomDropdown from "@/components/custom-dropdown";
-import { useEffect, useRef, useState } from "react";
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
-import Lightbox from "yet-another-react-lightbox"
-import "yet-another-react-lightbox/styles.css"
-import './index.css'
+import CustomDropdown from '@/components/custom-dropdown';
+import { useEffect, useRef, useState } from 'react';
+import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
+import Lightbox from 'yet-another-react-lightbox';
+import 'yet-another-react-lightbox/styles.css';
+import './index.css';
 
 export default function Images() {
     const [selectedYear, setSelectedYear] = useState<number>(2023);
     const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
-    const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
+    const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
     const options = [
         { value: '2023', label: '#SFF2023' },
@@ -52,14 +52,14 @@ export default function Images() {
 
     function resetAnimation(el: HTMLElement | null) {
         if (!el) return;
-        el.classList.remove("fade-in");
+        el.classList.remove('fade-in');
         void el.offsetWidth;
-        el.classList.add("fade-in");
-      }
-    
-  useEffect(() => {
-    imageRefs.current.forEach((el) => resetAnimation(el));
-  }, [selectedYear]);
+        el.classList.add('fade-in');
+    }
+
+    useEffect(() => {
+        imageRefs.current.forEach((el) => resetAnimation(el));
+    }, [selectedYear]);
 
     return (
         <section className="mb-22">
@@ -77,9 +77,9 @@ export default function Images() {
                                 key={i}
                                 ref={(el) => {
                                     imageRefs.current[i] = el;
-                                  }}
+                                }}
                                 src={`/images/gallery/${selectedYear}/${image.url}`}
-                                className="w-full block rounded-md fade-in cursor-pointer"
+                                className="fade-in block w-full cursor-pointer rounded-md"
                                 alt={image.title ?? ''}
                                 style={{ animationDelay: `${i * 100}ms`, animationFillMode: 'both' }}
                                 onClick={() => setLightboxIndex(i)}
