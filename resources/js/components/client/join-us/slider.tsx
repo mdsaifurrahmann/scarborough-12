@@ -37,12 +37,12 @@ const Slider = () => {
                                 </p>
                             </div>
                             <div className="w-full">
-                                <a
+                                <Link
                                     href={route('apply-artist')}
                                     className="block w-full rounded-lg border border-white bg-white px-6 py-2 text-center hover:bg-transparent"
                                 >
                                     Apply Now
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </SwiperSlide>
