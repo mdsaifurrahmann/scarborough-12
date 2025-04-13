@@ -60,12 +60,12 @@ const Slider = () => {
                                 </p>
                             </div>
                             <div className="w-full">
-                                <a
-                                    href="javascript:void(0)"
+                                <Link
+                                    href={route('apply-volunteer')}
                                     className="block w-full rounded-lg border border-white bg-white px-6 py-2 text-center hover:bg-transparent"
                                 >
                                     Apply Now
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </SwiperSlide>

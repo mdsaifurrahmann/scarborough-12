@@ -16,10 +16,9 @@ const TopSection = () => {
                             <p>
                                 We are currently accepting{' '}
                                 <span className="bg-primary rounded-sm py-px">
-                                    applications for vendors, artists, and sponsors for Scarborough Folk Fest 2025.
+                                    applications for Vendors, Volunteer, Artists, and Sponsors for Scarborough Folk Fest 2025.
                                 </span>
                             </p>
-                            <p>Volunteer applications will open soon.</p>
 
                             <p>Don’t miss your chance to get involved — stay tuned for updates!</p>
                         </div>

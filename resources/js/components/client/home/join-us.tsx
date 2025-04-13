@@ -83,7 +83,7 @@ const JoinUs = () => {
                             </SwiperSlide>
                             <SwiperSlide>
                                 <h3 className="title">Volunteer</h3>
-                                <Link href={route('join-us')}>
+                                <Link href={route('apply-volunteer')}>
                                     <div className="card">
                                         <p className="font-ysabeau text-xl leading-[1.2]">
                                             Be a part of the action! Volunteer with us and help create unforgettable festival experiences.
