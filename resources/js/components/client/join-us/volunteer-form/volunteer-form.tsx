@@ -65,7 +65,6 @@ const VolunteerForm = ({ success, error }: VolunteerFormProps) => {
 
         volunteering_area_other: '',
 
-
         relevant_experience: '',
         special_requirements: '',
         tshirt_size: '',
@@ -74,12 +73,7 @@ const VolunteerForm = ({ success, error }: VolunteerFormProps) => {
         'cf-turnstile-response': '',
     });
 
-
-    const handleCheckboxChange = (
-        field: 'available_days' | 'volunteering_area',
-        value: string,
-        checked: boolean
-    ) => {
+    const handleCheckboxChange = (field: 'available_days' | 'volunteering_area', value: string, checked: boolean) => {
         // For safety, ensure that the field is indeed an array
         const currentValues: string[] = data[field] || [];
         if (checked) {
@@ -89,10 +83,12 @@ const VolunteerForm = ({ success, error }: VolunteerFormProps) => {
             }
         } else {
             // Filter the value out if unchecked
-            setData(field, currentValues.filter(item => item !== value));
+            setData(
+                field,
+                currentValues.filter((item) => item !== value),
+            );
         }
     };
-
 
     const steps = [
         // Step 1: Business Information
@@ -166,15 +162,16 @@ const VolunteerForm = ({ success, error }: VolunteerFormProps) => {
                     placeholder="Your Address"
                 />
                 <InputError className="mb-3" message={errors.address} />
-
             </div>
         </>,
 
         // Step 2: Products & Services
         <>
-
             <h5>Emergency Contact</h5>
-            <p className='font-ysabeau mb-3'>Please provide the name and contact details of someone who can be reached in case of an emergency during the event. This information will be used only if necessary to ensure your safety.  </p>
+            <p className="font-ysabeau mb-3">
+                Please provide the name and contact details of someone who can be reached in case of an emergency during the event. This information
+                will be used only if necessary to ensure your safety.{' '}
+            </p>
 
             <div className="flex flex-col">
                 <label>
@@ -193,10 +190,7 @@ const VolunteerForm = ({ success, error }: VolunteerFormProps) => {
                 />
                 <InputError className="mb-3" message={errors.em_full_name} />
 
-
-                <label>
-                    Relationship to you
-                </label>
+                <label>Relationship to you</label>
 
                 <input
                     type="text"
@@ -224,29 +218,29 @@ const VolunteerForm = ({ success, error }: VolunteerFormProps) => {
                     placeholder="Phone Number of emergency contact"
                 />
                 <InputError className="mb-3" message={errors.em_phone} />
-
             </div>
         </>,
 
         // Step 3: Legal Requirements
         <>
             <div className="flex flex-col">
-                <label >Which day(s) are you available to volunteer?</label>
+                <label>Which day(s) are you available to volunteer?</label>
 
-                <div className='ml-3'>
+                <div className="ml-3">
                     <div className="items-top mt-4 flex space-x-2">
                         <Checkbox
                             name="available_days"
                             id="available_days_1"
                             className="mt-2 mb-2"
-                            checked={data.available_days.includes("Friday, July 25")}
-                            onCheckedChange={(checked) =>
-                                handleCheckboxChange("available_days", "Friday, July 25", checked as boolean)
-                            }
+                            checked={data.available_days.includes('Friday, July 25')}
+                            onCheckedChange={(checked) => handleCheckboxChange('available_days', 'Friday, July 25', checked as boolean)}
                         />
 
                         <div className="grid gap-1.5 leading-none">
-                            <label htmlFor="available_days_1" className="font-ysabeau text-lg peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                            <label
+                                htmlFor="available_days_1"
+                                className="font-ysabeau text-lg peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
                                 Friday, July 25
                             </label>
                         </div>
@@ -257,14 +251,15 @@ const VolunteerForm = ({ success, error }: VolunteerFormProps) => {
                             name="available_days"
                             id="available_days_2"
                             className="mt-2 mb-2"
-                            checked={data.available_days.includes("Saturday, July 26")}
-                            onCheckedChange={(checked) =>
-                                handleCheckboxChange("available_days", "Saturday, July 26", checked as boolean)
-                            }
+                            checked={data.available_days.includes('Saturday, July 26')}
+                            onCheckedChange={(checked) => handleCheckboxChange('available_days', 'Saturday, July 26', checked as boolean)}
                         />
 
                         <div className="grid gap-1.5 leading-none">
-                            <label htmlFor="available_days_2" className="font-ysabeau text-lg peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                            <label
+                                htmlFor="available_days_2"
+                                className="font-ysabeau text-lg peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
                                 Saturday, July 26
                             </label>
                         </div>
@@ -276,105 +271,95 @@ const VolunteerForm = ({ success, error }: VolunteerFormProps) => {
                             id="available_days_3"
                             className="mt-2 mb-2"
                             value="Sunday, July 27"
-                            checked={data.available_days.includes("Sunday, July 27")}
-                            onCheckedChange={(checked) =>
-                                handleCheckboxChange("available_days", "Sunday, July 27", checked as boolean)
-                            }
+                            checked={data.available_days.includes('Sunday, July 27')}
+                            onCheckedChange={(checked) => handleCheckboxChange('available_days', 'Sunday, July 27', checked as boolean)}
                         />
 
                         <div className="grid gap-1.5 leading-none">
-                            <label htmlFor="available_days_3" className="font-ysabeau text-lg peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                            <label
+                                htmlFor="available_days_3"
+                                className="font-ysabeau text-lg peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
                                 Sunday, July 27
                             </label>
                         </div>
                     </div>
                 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-                <label className='mt-4'>Which areas of the festival would you be interested in volunteering for? (Max 3 selections)</label>
+                <label className="mt-4">Which areas of the festival would you be interested in volunteering for? (Max 3 selections)</label>
 
                 <div className="ml-3">
-
                     <div className="items-top mt-4 flex space-x-2">
                         <Checkbox
                             name="volunteering_area"
                             id="volunteering_area_1"
                             className="mt-2 mb-3"
-                            checked={data.volunteering_area.includes("Event Setup/Teardown")}
-                            onCheckedChange={(checked) =>
-                                handleCheckboxChange("volunteering_area", "Event Setup/Teardown", checked as boolean)
-                            }
+                            checked={data.volunteering_area.includes('Event Setup/Teardown')}
+                            onCheckedChange={(checked) => handleCheckboxChange('volunteering_area', 'Event Setup/Teardown', checked as boolean)}
                         />
 
                         <div className="grid gap-1.5 leading-none">
-                            <label htmlFor="volunteering_area_1" className="font-ysabeau text-lg peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                            <label
+                                htmlFor="volunteering_area_1"
+                                className="font-ysabeau text-lg peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
                                 Event Setup/Teardown
                             </label>
                         </div>
                     </div>
-
 
                     <div className="items-top mt-4 flex space-x-2">
                         <Checkbox
                             name="volunteering_area"
                             id="volunteering_area_2"
                             className="mt-2 mb-3"
-                            checked={data.volunteering_area.includes("Information Booth")}
-                            onCheckedChange={(checked) =>
-                                handleCheckboxChange("volunteering_area", "Information Booth", checked as boolean)
-                            }
+                            checked={data.volunteering_area.includes('Information Booth')}
+                            onCheckedChange={(checked) => handleCheckboxChange('volunteering_area', 'Information Booth', checked as boolean)}
                         />
 
                         <div className="grid gap-1.5 leading-none">
-                            <label htmlFor="volunteering_area_2" className="font-ysabeau text-lg peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                            <label
+                                htmlFor="volunteering_area_2"
+                                className="font-ysabeau text-lg peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
                                 Information Booth
                             </label>
                         </div>
                     </div>
-
 
                     <div className="items-top mt-4 flex space-x-2">
                         <Checkbox
                             name="volunteering_area"
                             id="volunteering_area_3"
                             className="mt-2 mb-3"
-                            checked={data.volunteering_area.includes("Registration/Survey")}
-                            onCheckedChange={(checked) =>
-                                handleCheckboxChange("volunteering_area", "Registration/Survey", checked as boolean)
-                            }
+                            checked={data.volunteering_area.includes('Registration/Survey')}
+                            onCheckedChange={(checked) => handleCheckboxChange('volunteering_area', 'Registration/Survey', checked as boolean)}
                         />
 
                         <div className="grid gap-1.5 leading-none">
-                            <label htmlFor="volunteering_area_3" className="font-ysabeau text-lg peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                            <label
+                                htmlFor="volunteering_area_3"
+                                className="font-ysabeau text-lg peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
                                 Registration/Survey
                             </label>
                         </div>
                     </div>
-
 
                     <div className="items-top mt-4 flex space-x-2">
                         <Checkbox
                             name="volunteering_area"
                             id="volunteering_area_4"
                             className="mt-2 mb-3"
-                            checked={data.volunteering_area.includes("Stage Management")}
-                            onCheckedChange={(checked) =>
-                                handleCheckboxChange("volunteering_area", "Stage Management", checked as boolean)
-                            }
+                            checked={data.volunteering_area.includes('Stage Management')}
+                            onCheckedChange={(checked) => handleCheckboxChange('volunteering_area', 'Stage Management', checked as boolean)}
                         />
 
                         <div className="grid gap-1.5 leading-none">
-                            <label htmlFor="volunteering_area_4" className="font-ysabeau text-lg peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                            <label
+                                htmlFor="volunteering_area_4"
+                                className="font-ysabeau text-lg peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
                                 Stage Management
                             </label>
                         </div>
@@ -385,98 +370,100 @@ const VolunteerForm = ({ success, error }: VolunteerFormProps) => {
                             name="volunteering_area"
                             id="volunteering_area_5"
                             className="mt-2 mb-3"
-                            checked={data.volunteering_area.includes("Hospitality (e.g., assisting performers)")}
+                            checked={data.volunteering_area.includes('Hospitality (e.g., assisting performers)')}
                             onCheckedChange={(checked) =>
-                                handleCheckboxChange("volunteering_area", "Hospitality (e.g., assisting performers)", checked as boolean)
+                                handleCheckboxChange('volunteering_area', 'Hospitality (e.g., assisting performers)', checked as boolean)
                             }
                         />
 
                         <div className="grid gap-1.5 leading-none">
-                            <label htmlFor="volunteering_area_5" className="font-ysabeau text-lg peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                            <label
+                                htmlFor="volunteering_area_5"
+                                className="font-ysabeau text-lg peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
                                 Hospitality (e.g., assisting performers)
                             </label>
                         </div>
                     </div>
-
 
                     <div className="items-top mt-4 flex space-x-2">
                         <Checkbox
                             name="volunteering_area"
                             id="volunteering_area_6"
                             className="mt-2 mb-3"
-                            checked={data.volunteering_area.includes("Food & Beverage")}
-                            onCheckedChange={(checked) =>
-                                handleCheckboxChange("volunteering_area", "Food & Beverage", checked as boolean)
-                            }
+                            checked={data.volunteering_area.includes('Food & Beverage')}
+                            onCheckedChange={(checked) => handleCheckboxChange('volunteering_area', 'Food & Beverage', checked as boolean)}
                         />
 
                         <div className="grid gap-1.5 leading-none">
-                            <label htmlFor="volunteering_area_6" className="font-ysabeau text-lg peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                            <label
+                                htmlFor="volunteering_area_6"
+                                className="font-ysabeau text-lg peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
                                 Food & Beverage
                             </label>
                         </div>
                     </div>
-
 
                     <div className="items-top mt-4 flex space-x-2">
                         <Checkbox
                             name="volunteering_area"
                             id="volunteering_area_7"
                             className="mt-2 mb-3"
-                            checked={data.volunteering_area.includes("Marketing & Communication")}
-                            onCheckedChange={(checked) =>
-                                handleCheckboxChange("volunteering_area", "Marketing & Communication", checked as boolean)
-                            }
+                            checked={data.volunteering_area.includes('Marketing & Communication')}
+                            onCheckedChange={(checked) => handleCheckboxChange('volunteering_area', 'Marketing & Communication', checked as boolean)}
                         />
 
                         <div className="grid gap-1.5 leading-none">
-                            <label htmlFor="volunteering_area_7" className="font-ysabeau text-lg peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                            <label
+                                htmlFor="volunteering_area_7"
+                                className="font-ysabeau text-lg peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
                                 Marketing & Communication
                             </label>
                         </div>
                     </div>
-
 
                     <div className="items-top mt-4 flex space-x-2">
                         <Checkbox
                             name="volunteering_area"
                             id="volunteering_area_8"
                             className="mt-2 mb-3"
-                            checked={data.volunteering_area.includes("Photography/Videography")}
-                            onCheckedChange={(checked) =>
-                                handleCheckboxChange("volunteering_area", "Photography/Videography", checked as boolean)
-                            }
+                            checked={data.volunteering_area.includes('Photography/Videography')}
+                            onCheckedChange={(checked) => handleCheckboxChange('volunteering_area', 'Photography/Videography', checked as boolean)}
                         />
 
                         <div className="grid gap-1.5 leading-none">
-                            <label htmlFor="volunteering_area_8" className="font-ysabeau text-lg peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                            <label
+                                htmlFor="volunteering_area_8"
+                                className="font-ysabeau text-lg peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
                                 Photography/Videography
                             </label>
                         </div>
                     </div>
-
 
                     <div className="items-top mt-4 flex space-x-2">
                         <Checkbox
                             name="volunteering_area"
                             id="volunteering_area_9"
                             className="mt-2 mb-3"
-                            checked={data.volunteering_area.includes("Other")}
-                            onCheckedChange={(checked) =>
-                                handleCheckboxChange("volunteering_area", "Other", checked as boolean)
-                            }
+                            checked={data.volunteering_area.includes('Other')}
+                            onCheckedChange={(checked) => handleCheckboxChange('volunteering_area', 'Other', checked as boolean)}
                         />
 
                         <div className="grid gap-1.5 leading-none">
-                            <label htmlFor="volunteering_area_9" className="font-ysabeau text-lg peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                            <label
+                                htmlFor="volunteering_area_9"
+                                className="font-ysabeau text-lg peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
                                 Other
                             </label>
                         </div>
                     </div>
-
                 </div>
 
-                {data.volunteering_area.includes("Other") && (
+                {data.volunteering_area.includes('Other') && (
                     <>
                         <label htmlFor="volunteering_area_other" className="mt-3">
                             Other Value <span className="text-red-500">* (Required if "Other" is selected)</span>
@@ -491,10 +478,8 @@ const VolunteerForm = ({ success, error }: VolunteerFormProps) => {
                             placeholder="Other Value of Volunteering Area"
                         />
                         <InputError className="mb-3" message={errors.volunteering_area_other} />
-
                     </>
                 )}
-
 
                 <label htmlFor="relevant_experience" className="mt-3">
                     Do you have any relevant experience or skills? (e.g., customer service, event planning, first aid)
@@ -509,16 +494,13 @@ const VolunteerForm = ({ success, error }: VolunteerFormProps) => {
                     placeholder="Relevant Experience"
                 />
                 <InputError className="mb-3" message={errors.relevant_experience} />
-
             </div>
         </>,
 
         <>
             <div className="flex flex-col">
-
-
                 <label htmlFor="special_requirements" className="mt-3">
-                    Do you have any allergies, health concerns, or special requirements?  <span className="text-red-500">*</span>
+                    Do you have any allergies, health concerns, or special requirements? <span className="text-red-500">*</span>
                 </label>
                 <input
                     type="text"
@@ -530,7 +512,6 @@ const VolunteerForm = ({ success, error }: VolunteerFormProps) => {
                     placeholder="Special Requirements or Any health concerns"
                 />
                 <InputError className="mb-3" message={errors.special_requirements} />
-
 
                 <label htmlFor="tshirt_size" className="mt-3">
                     T-Shirt Size
@@ -557,7 +538,6 @@ const VolunteerForm = ({ success, error }: VolunteerFormProps) => {
                 </RadioGroup>
 
                 <InputError className="mb-3" message={errors.tshirt_size} />
-
 
                 <label htmlFor="signature" className="mt-3">
                     Signature <span className="text-red-500">*</span>

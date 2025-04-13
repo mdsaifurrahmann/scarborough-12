@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('volunteer_applications', function (Blueprint $table) {
-           
+
             $table->id();
 
             $table->string('full_name');
@@ -36,7 +36,7 @@ return new class extends Migration
             $table->string('signature');
 
             $table->timestamps();
-            
+
         });
     }
 

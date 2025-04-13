@@ -2,13 +2,12 @@
 
 namespace App\Http\Requests\v1;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Mews\Purifier\Facades\Purifier;
-use Illuminate\Support\Facades\DB;
 use App\Models\v1\VolunteerModel;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
-
+use Illuminate\Support\Facades\Log;
+use Mews\Purifier\Facades\Purifier;
 
 class VolunteerRequest extends FormRequest
 {
@@ -100,13 +99,12 @@ class VolunteerRequest extends FormRequest
                     $result = $response->json();
 
                     if (! $result['success']) {
-                        $fail('Turnstile verification failed: ' . implode(', ', $result['error-codes'] ?? ['Unknown error']));
+                        $fail('Turnstile verification failed: '.implode(', ', $result['error-codes'] ?? ['Unknown error']));
                     }
                 },
             ],
         ];
     }
-
 
     public function messages(): array
     {
@@ -157,10 +155,8 @@ class VolunteerRequest extends FormRequest
         ];
     }
 
-
     public function storeApplication()
     {
-
 
         $validated = $this->validated();
 
@@ -175,7 +171,7 @@ class VolunteerRequest extends FormRequest
 
             DB::commit();
         } catch (\Exception $e) {
-            Log::error('Error creating Volunteer application from Request ' . $e->getMessage());
+            Log::error('Error creating Volunteer application from Request '.$e->getMessage());
             DB::rollBack();
         }
     }
