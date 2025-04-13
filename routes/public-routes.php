@@ -4,6 +4,7 @@ use App\Http\Controllers\v1\ArtistController;
 use App\Http\Controllers\v1\ContactForm;
 use App\Http\Controllers\v1\SponsorController;
 use App\Http\Controllers\v1\VendorApplications;
+use App\Http\Controllers\v1\VolunteerController;
 use Illuminate\Support\Facades\Route;
 
 // Contact Form
@@ -17,3 +18,5 @@ Route::post('/sponsor-application', [SponsorController::class, 'store'])->name('
 
 // Artist Application
 Route::post('/artist-application', [ArtistController::class, 'store'])->name('artist-application.store');
+
+Route::post('/volunteer-application', [VolunteerController::class, 'store'])->name('volunteer-application.store');

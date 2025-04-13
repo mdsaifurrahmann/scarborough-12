@@ -84,6 +84,16 @@ class PublicRoutes extends Controller
         ]);
     }
 
+    public function applyVolunteer(Request $request)
+    {
+        return Inertia::render('volunteer_application', [
+            'title' => 'Volunteer Application',
+            'success' => $request->session()->get('success'),
+            'error' => $request->session()->get('error'),
+            'requiresChallenge' => $request->session()->get('requiresChallenge'),
+        ]);
+    }
+
     public function gallery(Request $request)
     {
         return Inertia::render('gallery', [
