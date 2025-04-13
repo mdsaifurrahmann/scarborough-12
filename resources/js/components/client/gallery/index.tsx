@@ -141,11 +141,8 @@ export default function Images() {
                     </Masonry>
                 </ResponsiveMasonry>
                 {visibleImagesCount < images.length && (
-                    <div className="text-center mt-4">
-                        <button
-                            className="px-4 py-2 bg-primary text-black font-bold rounded-md cursor-pointer"
-                            onClick={handleLoadMore}
-                        >
+                    <div className="mt-4 text-center">
+                        <button className="bg-primary cursor-pointer rounded-md px-4 py-2 font-bold text-black" onClick={handleLoadMore}>
                             Load More
                         </button>
                     </div>
