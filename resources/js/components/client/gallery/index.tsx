@@ -9,6 +9,7 @@ export default function Images() {
     const [selectedYear, setSelectedYear] = useState<number>(2022);
     const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
     const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+    const [visibleImagesCount, setVisibleImagesCount] = useState<number>(12);
 
     const options = [
         { value: '2022', label: '#SFF2022' },
@@ -90,9 +91,15 @@ export default function Images() {
     };
 
     const images = imagesByYear[selectedYear] || [];
+    const visibleImages = images.slice(0, visibleImagesCount);
 
     const handleSelect = (option: { value: string; label: string } | null) => {
         setSelectedYear(Number(option?.value));
+        setVisibleImagesCount(12); // Reset visible images count when year changes
+    };
+
+    const handleLoadMore = () => {
+        setVisibleImagesCount((prevCount) => Math.min(prevCount + 12, images.length));
     };
 
     function resetAnimation(el: HTMLElement | null) {
@@ -117,7 +124,7 @@ export default function Images() {
                 </div>
                 <ResponsiveMasonry columnsCountBreakPoints={{ 0: 2, 1023: 3 }}>
                     <Masonry gutter="10px" className="bg-primary rounded-md p-2">
-                        {images.map((image, i) => (
+                        {visibleImages.map((image, i) => (
                             <img
                                 key={i}
                                 ref={(el) => {
@@ -133,6 +140,16 @@ export default function Images() {
                         ))}
                     </Masonry>
                 </ResponsiveMasonry>
+                {visibleImagesCount < images.length && (
+                    <div className="text-center mt-4">
+                        <button
+                            className="px-4 py-2 bg-primary text-black font-bold rounded-md cursor-pointer"
+                            onClick={handleLoadMore}
+                        >
+                            Load More
+                        </button>
+                    </div>
+                )}
                 {lightboxIndex !== null && (
                     <Lightbox
                         open={lightboxIndex !== null}

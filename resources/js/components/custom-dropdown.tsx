@@ -18,7 +18,7 @@ const DropdownIndicator = (props: DropdownIndicatorProps<OptionType>) => (
     <components.DropdownIndicator {...props}>
         <div
             style={{
-                backgroundColor: '#FFC107',
+                backgroundColor: '#ffc603',
                 borderRadius: '4px',
                 display: 'flex',
                 alignItems: 'center',
@@ -44,7 +44,7 @@ const ValueContainer = (props: ValueContainerProps<OptionType, false>) => {
             {selectedValue && (
                 <div
                     style={{
-                        backgroundColor: '#FFC107',
+                        backgroundColor: '#ffc603',
                         padding: '8px 12px',
                         borderRadius: '4px',
                         fontWeight: 'bold',
