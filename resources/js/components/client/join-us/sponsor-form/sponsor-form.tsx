@@ -44,7 +44,7 @@ const SponsorForm = ({ success, error }: SponsorFormProps) => {
 
     const turnstileRef = useRef<TurnstileInstance | null>(null);
 
-    const { data, setData, post, processing, errors, reset } = useForm<SponsorFormData>({
+    const { data, setData, post, processing, errors, reset, setError, clearErrors } = useForm<SponsorFormData>({
         org_name: '',
         contact_person: '',
         position: '',
@@ -65,6 +65,38 @@ const SponsorForm = ({ success, error }: SponsorFormProps) => {
         signature: '',
         'cf-turnstile-response': '',
     });
+
+    const validateStep = (step: number): Record<string, string> => {
+        const errors: Record<string, string> = {};
+        switch (step) {
+            case 1:
+                if (!data.org_name.trim()) errors.org_name = 'Company/Organization Name is required';
+                if (!data.contact_person.trim()) errors.contact_person = 'Contact Person is required';
+                if (!data.position.trim()) errors.position = 'Position is required';
+                if (!data.phone.trim()) errors.phone = 'Phone Number is required';
+                if (!data.email.trim()) {
+                    errors.email = 'Email is required';
+                } else if (!/\S+@\S+\.\S+/.test(data.email)) {
+                    errors.email = 'Invalid email format';
+                }
+                if (!data.company_addr.trim()) errors.company_addr = 'Company Address is required';
+                break;
+            case 2:
+                if (!data.sponsor_level) errors.sponsor_level = 'Please select a sponsorship level';
+                break;
+            case 3:
+                if (!data.why_interested.trim()) errors.why_interested = 'This field is required';
+                break;
+            case 4:
+                if (!data.agreement_1) errors.agreement_1 = 'You must agree to this condition';
+                if (!data.agreement_2) errors.agreement_2 = 'You must agree to this condition';
+                if (!data.agreement_3) errors.agreement_3 = 'You must agree to this condition';
+                if (!data.signature.trim()) errors.signature = 'Signature is required';
+                if (!data['cf-turnstile-response']) errors['cf-turnstile-response'] = 'Please complete the CAPTCHA';
+                break;
+        }
+        return errors;
+    };
 
     const steps = [
         // Step 1: Business Information
@@ -256,6 +288,7 @@ const SponsorForm = ({ success, error }: SponsorFormProps) => {
                         </label>
                     </div>
                 </div>
+                <InputError className="mb-3" message={errors.agreement_1} />
 
                 <div className="items-top mt-4 flex space-x-2">
                     <Checkbox
@@ -272,6 +305,7 @@ const SponsorForm = ({ success, error }: SponsorFormProps) => {
                         </label>
                     </div>
                 </div>
+                <InputError className="mb-3" message={errors.agreement_2} />
 
                 <div className="items-top mt-4 flex space-x-2">
                     <Checkbox
@@ -288,6 +322,7 @@ const SponsorForm = ({ success, error }: SponsorFormProps) => {
                         </label>
                     </div>
                 </div>
+                <InputError className="mb-3" message={errors.agreement_3} />
 
                 <label htmlFor="signature" className="mt-3">
                     Signature <span className="text-red-500">*</span>
@@ -325,6 +360,16 @@ const SponsorForm = ({ success, error }: SponsorFormProps) => {
     const totalSteps = steps.length; // Adjust based on your step division
 
     const handleNext = () => {
+        const stepErrors = validateStep(currentStep);
+
+        if (Object.keys(stepErrors).length > 0) {
+            clearErrors();
+            Object.entries(stepErrors).forEach(([field, message]) => {
+                setError(field, message);
+            });
+            return;
+        }
+
         if (currentStep < totalSteps) {
             setCurrentStep((prev) => prev + 1);
             window.scrollTo(0, 330);
@@ -342,6 +387,15 @@ const SponsorForm = ({ success, error }: SponsorFormProps) => {
         e.preventDefault();
 
         // console.log(data);
+
+        const stepErrors = validateStep(totalSteps);
+        if (Object.keys(stepErrors).length > 0) {
+            clearErrors();
+            Object.entries(stepErrors).forEach(([field, message]) => {
+                setError(field, message);
+            });
+            return;
+        }
 
         post(route('sponsor-application.store'), {
             preserveScroll: true,

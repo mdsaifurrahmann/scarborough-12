@@ -2,8 +2,8 @@ import ClientLayout from '@/layouts/client-layout';
 import { Head, usePage } from '@inertiajs/react';
 
 import BottomSection from '@/components/client/join-us/bottom-section';
-import VolunteerForm from '@/components/client/join-us/volunteer-form/volunteer-form';
 import TopSection from '@/components/client/join-us/top-section';
+import VolunteerForm from '@/components/client/join-us/volunteer-form/volunteer-form';
 import { Toaster } from '@/components/ui/sonner';
 
 function VolunteerApplication() {

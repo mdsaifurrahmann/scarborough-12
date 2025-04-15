@@ -60,7 +60,7 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
 
     const turnstileRef = useRef<TurnstileInstance | null>(null);
 
-    const { data, setData, post, processing, errors, reset } = useForm<VendorFormData>({
+    const { data, setData, post, processing, errors, reset, setError, clearErrors } = useForm<VendorFormData>({
         business_name: '',
         contact_person: '',
         phone_number: '',
@@ -99,6 +99,57 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
         // ReCAPTCHA
         'cf-turnstile-response': '',
     });
+
+    const validateStep = (step: number): Record<string, string> => {
+        const errors: Record<string, string> = {};
+        switch (step) {
+            case 1:
+                if (!data.business_name.trim()) errors.business_name = 'Business Name is required';
+                if (!data.contact_person.trim()) errors.contact_person = 'Contact Person is required';
+                if (!data.phone_number.trim()) errors.phone_number = 'Phone Number is required';
+                if (!data.email.trim()) {
+                    errors.email = 'Email is required';
+                } else if (!/\S+@\S+\.\S+/.test(data.email)) {
+                    errors.email = 'Invalid email format';
+                }
+                if (!data.business_address.trim()) errors.business_address = 'Business Address is required';
+                if (!data.vendor_type) errors.vendor_type = 'Please select a vendor type';
+                if (data.vendor_type === 'Other' && !data.vendor_other?.trim()) {
+                    errors.vendor_other = 'Please specify your vendor type';
+                }
+                break;
+            case 2:
+                if (!data.product_services_desc.trim()) errors.product_services_desc = 'Product/Service description is required';
+                if (data.min_price === undefined || isNaN(data.min_price)) errors.min_price = 'Minimum price is required';
+                if (data.max_price === undefined || isNaN(data.max_price)) errors.max_price = 'Maximum price is required';
+                if (data.min_price !== undefined && data.max_price !== undefined && data.min_price > data.max_price) {
+                    errors.max_price = 'Maximum price must be greater than minimum price';
+                }
+                if (data.liability_insurance === undefined) errors.liability_insurance = 'Please select an option';
+                break;
+            case 3:
+                // Only validate these if vendor is food/beverage
+                if (['Food Vendor', 'Beverage Vendor'].includes(data.vendor_type)) {
+                    if (data.vendor_permit === undefined) errors.vendor_permit = 'Please select an option';
+                    if (data.comply_regulation === undefined) errors.comply_regulation = 'Please select an option';
+                }
+                break;
+            case 4:
+                if (!data.space.trim()) errors.space = 'Space requirements are required';
+                if (data.electricity === undefined) errors.electricity = 'Please select an option';
+                if (data.electricity === true && !data.electricity_power?.trim()) {
+                    errors.electricity_power = 'Please specify your power requirements';
+                }
+                if (data.own_tent_table === undefined) errors.own_tent_table = 'Please select an option';
+                break;
+            case 5:
+                if (data.sponsore_opportunity === undefined) errors.sponsore_opportunity = 'Please select an option';
+                if (!data.agreement) errors.agreement = 'You must agree to the terms';
+                if (!data['cf-turnstile-response']) errors['cf-turnstile-response'] = 'Please complete the CAPTCHA';
+                break;
+        }
+        return errors;
+    };
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -241,6 +292,8 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                         <RadioGroupItem value="Other" id="other" />
                         <label htmlFor="other">Other</label>
                     </div>
+
+                    <InputError className="mb-3" message={errors.vendor_type} />
                 </RadioGroup>
 
                 {data.vendor_type === 'Other' && (
@@ -278,7 +331,7 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                 <InputError className="mb-3" message={errors.product_services_desc} />
 
                 <label htmlFor="min_price">
-                    Price Range<span className="text-red-500">*</span>
+                    Price Range <span className="text-red-500">*</span>
                 </label>
                 <div className="flex flex-col gap-x-3 lg:flex-row lg:items-center">
                     <div className="flex flex-col">
@@ -387,7 +440,7 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
         <>
             <div className="flex flex-col">
                 <label htmlFor="space">
-                    Space Required <span className="text-red-500">(e.g. 10’ x 10’)</span>
+                    Space Required <span className="text-red-500"> * (e.g. 10’ x 10’)</span>
                 </label>
                 <input
                     type="text"
@@ -400,7 +453,10 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                 />
                 <InputError className="mb-3" message={errors.space} />
 
-                <label>Do you require electricity?</label>
+                <label>
+                    Do you require electricity?
+                    <span className="text-red-500"> * </span>
+                </label>
                 <RadioGroup
                     className="my-2 ml-3"
                     onValueChange={(value) => setData('electricity', value === '1' ? true : value === '0' ? false : undefined)}
@@ -434,7 +490,10 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                     </>
                 )}
 
-                <label>Do you have your own tent/table setup?</label>
+                <label>
+                    Do you have your own tent/table setup?
+                    <span className="text-red-500"> * </span>
+                </label>
                 <RadioGroup
                     className="my-2 ml-3"
                     onValueChange={(value) => setData('own_tent_table', value === '1' ? true : value === '0' ? false : undefined)}
@@ -472,7 +531,9 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                 </RadioGroup>
                 <InputError className="mb-3" message={errors.sponsore_opportunity} />
 
-                <label htmlFor="special_request">Special Requests or Comments</label>
+                <label htmlFor="special_request" className="mt-3">
+                    Special Requests or Comments
+                </label>
                 <input
                     type="text"
                     name="special_request"
@@ -506,6 +567,7 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                         </p>
                     </div>
                 </div>
+                <InputError className="mb-3" message={errors.agreement} />
 
                 <Turnstile
                     ref={turnstileRef}
@@ -529,6 +591,16 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
     const totalSteps = steps.length; // Adjust based on your step division
 
     const handleNext = () => {
+        const stepErrors = validateStep(currentStep);
+
+        if (Object.keys(stepErrors).length > 0) {
+            clearErrors();
+            Object.entries(stepErrors).forEach(([field, message]) => {
+                setError(field, message);
+            });
+            return;
+        }
+
         if (currentStep < totalSteps) {
             setCurrentStep((prev) => prev + 1);
             window.scrollTo(0, 330);
@@ -546,6 +618,15 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
         e.preventDefault();
 
         // console.log(data);
+
+        const stepErrors = validateStep(totalSteps);
+        if (Object.keys(stepErrors).length > 0) {
+            clearErrors();
+            Object.entries(stepErrors).forEach(([field, message]) => {
+                setError(field, message);
+            });
+            return;
+        }
 
         post(route('vendor-applications.store'), {
             preserveScroll: true,
