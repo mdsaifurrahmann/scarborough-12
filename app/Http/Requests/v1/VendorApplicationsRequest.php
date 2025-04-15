@@ -50,9 +50,7 @@ class VendorApplicationsRequest extends FormRequest
                 'nullable',
                 'file',
                 'mimes:pdf,jpg,jpeg,png,doc,docx',
-                'max:9216',
-                'required_if:vendor_permit,true',
-                'exclude_unless:vendor_permit,true',
+                'max:5120',
             ],
             'comply_regulation' => ['nullable', 'boolean', 'in:0,1,true,false'],
             'space' => ['string', 'required'],
@@ -79,7 +77,7 @@ class VendorApplicationsRequest extends FormRequest
                     $result = $response->json();
 
                     if (! $result['success']) {
-                        $fail('Turnstile verification failed: '.implode(', ', $result['error-codes'] ?? ['Unknown error']));
+                        $fail('Turnstile verification failed: ' . implode(', ', $result['error-codes'] ?? ['Unknown error']));
                     }
                 },
             ],
@@ -134,7 +132,6 @@ class VendorApplicationsRequest extends FormRequest
 
             'vendor_permit.required' => 'Please specify if you have a vendor permit.',
 
-            'vendor_permit_copy.required_if' => 'Vendor permit copy is required when permit is claimed.',
             'vendor_permit_copy.file' => 'Vendor permit must be a file upload.',
             'vendor_permit_copy.mimes' => 'Permit must be PDF, JPG, PNG, DOC, or DOCX format.',
             'vendor_permit_copy.max' => 'Permit file cannot exceed 5MB in size.',
@@ -193,7 +190,7 @@ class VendorApplicationsRequest extends FormRequest
 
             DB::commit();
         } catch (\Exception $e) {
-            Log::error('Error creating vendor application from Request '.$e->getMessage());
+            Log::error('Error creating vendor application from Request ' . $e->getMessage());
             DB::rollBack();
         }
     }
