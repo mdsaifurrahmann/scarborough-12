@@ -79,6 +79,10 @@ const SponsorForm = ({ success, error }: SponsorFormProps) => {
                 } else if (!/\S+@\S+\.\S+/.test(data.email)) {
                     errors.email = 'Invalid email format';
                 }
+                if (data.web_media && !/^(http|https):\/\//.test(data.web_media)) {
+                    errors.web_media = 'Invalid URL format. URL should start with http:// or https://';
+                }
+
                 if (!data.company_addr.trim()) errors.company_addr = 'Company Address is required';
                 break;
             case 2:
@@ -188,7 +192,7 @@ const SponsorForm = ({ success, error }: SponsorFormProps) => {
 
                 <label htmlFor="web_media">Website/Social Media Links</label>
                 <input
-                    type="text"
+                    type="url"
                     name="web_media"
                     id="web_media"
                     className="bg-darkwhite focus:outline-primary font-ysabeau mb-3 rounded-sm px-4 py-2"

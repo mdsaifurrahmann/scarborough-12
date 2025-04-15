@@ -84,6 +84,10 @@ const ArtistForm = ({ success, error }: ArtistFormProps) => {
                 } else if (!/\S+@\S+\.\S+/.test(data.email)) {
                     errors.email = 'Invalid email format';
                 }
+
+                if (data.web_media && !/^(http|https):\/\//.test(data.web_media)) {
+                    errors.web_media = 'Invalid URL format. URL should start with http:// or https://';
+                }
                 if (!data.city.trim()) errors.city = 'City is required';
                 if (!data.province) errors.province = 'Province is required';
                 break;
@@ -167,7 +171,7 @@ const ArtistForm = ({ success, error }: ArtistFormProps) => {
 
                 <label htmlFor="web_media">Website/Social Media Links (If applicable)</label>
                 <input
-                    type="text"
+                    type="url"
                     name="web_media"
                     id="web_media"
                     className="bg-darkwhite focus:outline-primary font-ysabeau mb-3 rounded-sm px-4 py-2"
