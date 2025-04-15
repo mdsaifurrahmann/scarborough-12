@@ -75,7 +75,6 @@ const Hero = () => {
                 src="./images/fss-banner.jpg"
                 alt="banner"
                 className="pointer-events-none relative -z-10 h-[881px] w-full object-cover lg:h-[1268px] xl:h-auto"
-
             />
             <div className="absolute top-0 left-0 z-10 flex h-full w-full flex-col items-center justify-end lg:justify-center">
                 <div className="container my-12 lg:mt-16 xl:mt-44 2xl:mt-16">

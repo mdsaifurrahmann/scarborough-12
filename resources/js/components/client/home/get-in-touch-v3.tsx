@@ -1,6 +1,6 @@
 import { useForm } from '@inertiajs/react';
 import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile';
-import { LoaderCircle, Facebook, Linkedin, Instagram, Youtube } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, LoaderCircle, Youtube } from 'lucide-react';
 import { FormEventHandler, useRef } from 'react';
 
 import InputError from '@/components/input-error';

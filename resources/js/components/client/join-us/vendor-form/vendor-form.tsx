@@ -118,7 +118,6 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                     errors.web_media = 'Invalid URL format. URL should start with http:// or https://';
                 }
 
-
                 if (!data.vendor_type) errors.vendor_type = 'Please select a vendor type';
                 if (data.vendor_type === 'Other' && !data.vendor_other?.trim()) {
                     errors.vendor_other = 'Please specify your vendor type';

@@ -1,4 +1,4 @@
-import { Facebook, Linkedin, Instagram, Youtube } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Youtube } from 'lucide-react';
 
 const StayUpdated = () => {
     return (
@@ -7,19 +7,19 @@ const StayUpdated = () => {
             <div className="flex items-center justify-center gap-12">
                 <a href="https://www.facebook.com/Scarboroughfolkfest" target="_blank">
                     {/* <img src="./images/social/fb.png" alt="facebook" loading="lazy" /> */}
-                    <Facebook size={32}/>
+                    <Facebook size={32} />
                 </a>
                 <a href="https://www.linkedin.com/company/paramparacanada/" target="_blank">
                     {/* <img src="./images/social/linkdedin.png" alt="linkedin" loading="lazy" /> */}
-                    <Linkedin size={32}/>
+                    <Linkedin size={32} />
                 </a>
                 <a href="https://www.instagram.com/paramparacanada/" target="_blank">
                     {/* <img src="./images/social/insta.png" alt="instagram" loading="lazy" /> */}
-                    <Instagram size={32}/>
+                    <Instagram size={32} />
                 </a>
                 <a href="https://www.youtube.com/@scarboroughfolkfest" target="_blank">
                     {/* <img src="./images/social/yt.png" alt="youtube" loading="lazy" /> */}
-                    <Youtube size={32}/>
+                    <Youtube size={32} />
                 </a>
             </div>
         </section>
