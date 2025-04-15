@@ -555,6 +555,8 @@ const ArtistForm = ({ success, error }: ArtistFormProps) => {
                                         'Try Again'
                                     ) : processing ? (
                                         <LoaderCircle className="h-4 w-4 animate-spin" />
+                                    ) : !turnstileToken ? (
+                                        'Verifying...'
                                     ) : (
                                         'Submit'
                                     )}

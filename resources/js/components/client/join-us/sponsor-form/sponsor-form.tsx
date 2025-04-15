@@ -499,6 +499,8 @@ const SponsorForm = ({ success, error }: SponsorFormProps) => {
                                         'Try Again'
                                     ) : processing ? (
                                         <LoaderCircle className="h-4 w-4 animate-spin" />
+                                    ) : !turnstileToken ? (
+                                        'Verifying...'
                                     ) : (
                                         'Submit'
                                     )}

@@ -331,7 +331,7 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                 <InputError className="mb-3" message={errors.product_services_desc} />
 
                 <label htmlFor="min_price">
-                    Price Range <span className="text-red-500">*</span>
+                    Price Range <span className="text-red-500">* (in CAD)</span>
                 </label>
                 <div className="flex flex-col gap-x-3 lg:flex-row lg:items-center">
                     <div className="flex flex-col">
@@ -730,6 +730,8 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                                         'Try Again'
                                     ) : processing ? (
                                         <LoaderCircle className="h-4 w-4 animate-spin" />
+                                    ) : !turnstileToken ? (
+                                        'Verifying...'
                                     ) : (
                                         'Submit'
                                     )}
