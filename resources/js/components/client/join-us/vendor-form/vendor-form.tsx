@@ -113,6 +113,12 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                     errors.email = 'Invalid email format';
                 }
                 if (!data.business_address.trim()) errors.business_address = 'Business Address is required';
+
+                if (data.web_media && !/^(http|https):\/\//.test(data.web_media)) {
+                    errors.web_media = 'Invalid URL format. URL should start with http:// or https://';
+                }
+
+
                 if (!data.vendor_type) errors.vendor_type = 'Please select a vendor type';
                 if (data.vendor_type === 'Other' && !data.vendor_other?.trim()) {
                     errors.vendor_other = 'Please specify your vendor type';
@@ -254,7 +260,7 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
 
                 <label htmlFor="web_media">Website/Social Media Links</label>
                 <input
-                    type="text"
+                    type="url"
                     name="web_media"
                     id="web_media"
                     className="bg-darkwhite focus:outline-primary font-ysabeau mb-3 rounded-sm px-4 py-2"

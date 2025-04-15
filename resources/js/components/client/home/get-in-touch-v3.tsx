@@ -1,6 +1,6 @@
 import { useForm } from '@inertiajs/react';
 import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile';
-import { LoaderCircle } from 'lucide-react';
+import { LoaderCircle, Facebook, Linkedin, Instagram, Youtube } from 'lucide-react';
 import { FormEventHandler, useRef } from 'react';
 
 import InputError from '@/components/input-error';
@@ -178,16 +178,20 @@ export default function GetInTouch({ success, error }: GetInTouchProps) {
                             <h3 className="mb-4 text-center text-[1.5rem] xl:mb-auto">social</h3>
                             <div className="border-primary mx-auto flex w-fit items-center justify-center gap-12 rounded-lg bg-transparent p-6 md:border xl:w-full">
                                 <a href="https://www.facebook.com/Scarboroughfolkfest" target="_blank">
-                                    <img src="./images/social/fb.png" alt="facebook" loading="lazy" />
+                                    {/* <img src="./images/social/fb.png" alt="facebook" loading="lazy" /> */}
+                                    <Facebook size={32} />
                                 </a>
                                 <a href="https://www.linkedin.com/company/paramparacanada/" target="_blank">
-                                    <img src="./images/social/linkdedin.png" alt="linkedin" loading="lazy" />
+                                    {/* <img src="./images/social/linkdedin.png" alt="linkedin" loading="lazy" /> */}
+                                    <Linkedin size={32} />
                                 </a>
                                 <a href="https://www.instagram.com/paramparacanada/" target="_blank">
-                                    <img src="./images/social/insta.png" alt="instagram" loading="lazy" />
+                                    {/* <img src="./images/social/insta.png" alt="instagram" loading="lazy" /> */}
+                                    <Instagram size={32} />
                                 </a>
                                 <a href="https://www.youtube.com/@scarboroughfolkfest" target="_blank">
-                                    <img src="./images/social/yt.png" alt="youtube" loading="lazy" />
+                                    {/* <img src="./images/social/yt.png" alt="youtube" loading="lazy" /> */}
+                                    <Youtube size={32} />
                                 </a>
                             </div>
                         </div>

@@ -30,6 +30,10 @@
         <meta name="twitter:image"
             content="https://opengraph.b-cdn.net/production/images/e969f17b-d762-4921-a75b-f97985ab2101.png?token=lc5LnSI35Id6QTpHvqQwVvVE4tX4HUgP53Jybik8850&height=147&width=306&expires=33275679988">
 
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
         {{-- <link rel="preconnect" href="https://fonts.bunny.net"> --}}
         {{-- <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" /> --}}
         {{-- <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script> --}}
