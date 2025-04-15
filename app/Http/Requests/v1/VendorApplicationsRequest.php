@@ -77,7 +77,7 @@ class VendorApplicationsRequest extends FormRequest
                     $result = $response->json();
 
                     if (! $result['success']) {
-                        $fail('Turnstile verification failed: ' . implode(', ', $result['error-codes'] ?? ['Unknown error']));
+                        $fail('Turnstile verification failed: '.implode(', ', $result['error-codes'] ?? ['Unknown error']));
                     }
                 },
             ],
@@ -190,7 +190,7 @@ class VendorApplicationsRequest extends FormRequest
 
             DB::commit();
         } catch (\Exception $e) {
-            Log::error('Error creating vendor application from Request ' . $e->getMessage());
+            Log::error('Error creating vendor application from Request '.$e->getMessage());
             DB::rollBack();
         }
     }
