@@ -47,7 +47,7 @@ const VolunteerForm = ({ success, error }: VolunteerFormProps) => {
 
     const turnstileRef = useRef<TurnstileInstance | null>(null);
 
-    const { data, setData, post, processing, errors, reset } = useForm<VolunteerFormData>({
+    const { data, setData, post, processing, errors, reset, setError, clearErrors } = useForm<VolunteerFormData>({
         full_name: '',
         dob: '',
         email: '',
@@ -72,6 +72,42 @@ const VolunteerForm = ({ success, error }: VolunteerFormProps) => {
         signature: '',
         'cf-turnstile-response': '',
     });
+
+    const validateStep = (step: number): Record<string, string> => {
+        const errors: Record<string, string> = {};
+        switch (step) {
+            case 1:
+                if (!data.full_name.trim()) errors.full_name = 'Full Name is required';
+                if (!data.dob) errors.dob = 'Date of Birth is required';
+                if (!data.phone.trim()) errors.phone = 'Phone Number is required';
+                if (!data.email.trim()) {
+                    errors.email = 'Email is required';
+                } else if (!/\S+@\S+\.\S+/.test(data.email)) {
+                    errors.email = 'Invalid email format';
+                }
+                if (!data.address.trim()) errors.address = 'Address is required';
+                break;
+            case 2:
+                if (!data.em_full_name.trim()) errors.em_full_name = 'Emergency Contact Name is required';
+                if (!data.em_phone.trim()) errors.em_phone = 'Emergency Phone Number is required';
+                break;
+            case 3:
+                if (data.available_days.length === 0) errors.available_days = 'Please select at least one available day';
+                if (data.volunteering_area.length === 0) {
+                    errors.volunteering_area = 'Please select at least one volunteering area';
+                } else if (data.volunteering_area.includes('Other') && !data.volunteering_area_other.trim()) {
+                    errors.volunteering_area_other = 'Please specify your volunteering area';
+                }
+                break;
+            case 4:
+                if (!data.special_requirements.trim()) errors.special_requirements = 'This field is required (enter "None" if applicable)';
+                if (!data.tshirt_size) errors.tshirt_size = 'Please select a t-shirt size';
+                if (!data.signature.trim()) errors.signature = 'Signature is required';
+                if (!data['cf-turnstile-response']) errors['cf-turnstile-response'] = 'Please complete the CAPTCHA';
+                break;
+        }
+        return errors;
+    };
 
     const handleCheckboxChange = (field: 'available_days' | 'volunteering_area', value: string, checked: boolean) => {
         // For safety, ensure that the field is indeed an array
@@ -224,7 +260,9 @@ const VolunteerForm = ({ success, error }: VolunteerFormProps) => {
         // Step 3: Legal Requirements
         <>
             <div className="flex flex-col">
-                <label>Which day(s) are you available to volunteer?</label>
+                <label>Which day(s) are you available to volunteer?
+                    <span className="text-red-500"> * </span>
+                </label>
 
                 <div className="ml-3">
                     <div className="items-top mt-4 flex space-x-2">
@@ -284,9 +322,13 @@ const VolunteerForm = ({ success, error }: VolunteerFormProps) => {
                             </label>
                         </div>
                     </div>
+
+                    <InputError className="mb-3" message={errors.available_days} />
                 </div>
 
-                <label className="mt-4">Which areas of the festival would you be interested in volunteering for? (Max 3 selections)</label>
+                <label className="mt-4">Which areas of the festival would you be interested in volunteering for? (Max 3 selections)
+                    <span className="text-red-500"> * </span>
+                </label>
 
                 <div className="ml-3">
                     <div className="items-top mt-4 flex space-x-2">
@@ -461,6 +503,8 @@ const VolunteerForm = ({ success, error }: VolunteerFormProps) => {
                             </label>
                         </div>
                     </div>
+
+                    <InputError className="mb-3" message={errors.volunteering_area} />
                 </div>
 
                 {data.volunteering_area.includes('Other') && (
@@ -575,6 +619,16 @@ const VolunteerForm = ({ success, error }: VolunteerFormProps) => {
     const totalSteps = steps.length; // Adjust based on your step division
 
     const handleNext = () => {
+        const stepErrors = validateStep(currentStep);
+
+        if (Object.keys(stepErrors).length > 0) {
+            clearErrors();
+            Object.entries(stepErrors).forEach(([field, message]) => {
+                setError(field, message);
+            });
+            return;
+        }
+
         if (currentStep < totalSteps) {
             setCurrentStep((prev) => prev + 1);
             window.scrollTo(0, 330);
@@ -591,7 +645,16 @@ const VolunteerForm = ({ success, error }: VolunteerFormProps) => {
     const submit: FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
 
-        console.log(data);
+        // console.log(data);
+
+        const stepErrors = validateStep(totalSteps);
+        if (Object.keys(stepErrors).length > 0) {
+            clearErrors();
+            Object.entries(stepErrors).forEach(([field, message]) => {
+                setError(field, message);
+            });
+            return;
+        }
 
         post(route('volunteer-application.store'), {
             preserveScroll: true,

@@ -99,7 +99,7 @@ const Hero = () => {
                                     {timeLeft.months} Month{timeLeft.months !== 1 ? 's' : ''} | {timeLeft.days} DAYS{' '}
                                     <span className="hidden lg:inline-block">|</span>
                                     <br className="lg:hidden" />
-                                    {timeLeft.hours} HOURS | {timeLeft.minutes} MIN | {timeLeft.seconds} SEC
+                                    {' '+ timeLeft.hours} HOURS | {timeLeft.minutes} MIN | {timeLeft.seconds} SEC
                                 </>
                             )}
                         </p>

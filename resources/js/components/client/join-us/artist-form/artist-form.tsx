@@ -15,7 +15,7 @@ interface ArtistFormProps {
 interface ArtistFormData {
     [key: string]: string | null | boolean | undefined | number;
     artist_name: string;
-    contact_person?: string;
+    contact_person: string;
     phone: string;
     email: string;
     web_media?: string;
@@ -27,7 +27,7 @@ interface ArtistFormData {
     duration: string;
     technical_requirements: string;
 
-    sound_check: boolean | undefined;
+    sound_check: boolean | null;
     artist_bio?: string;
     prev_performances?: string;
     perf_link_1: string;
@@ -46,7 +46,7 @@ const ArtistForm = ({ success, error }: ArtistFormProps) => {
 
     const turnstileRef = useRef<TurnstileInstance | null>(null);
 
-    const { data, setData, post, processing, errors, reset } = useForm<ArtistFormData>({
+    const { data, setData, post, processing, errors, reset, setError, clearErrors } = useForm<ArtistFormData>({
         artist_name: '',
         contact_person: '',
         phone: '',
@@ -60,7 +60,7 @@ const ArtistForm = ({ success, error }: ArtistFormProps) => {
         duration: '',
         technical_requirements: '',
 
-        sound_check: undefined,
+        sound_check: false,
         artist_bio: '',
         prev_performances: '',
         perf_link_1: '',
@@ -71,6 +71,42 @@ const ArtistForm = ({ success, error }: ArtistFormProps) => {
         signature: '',
         'cf-turnstile-response': '',
     });
+
+
+    const validateStep = (step: number): Record<string, string> => {
+        const errors: Record<string, string> = {};
+        switch (step) {
+            case 1:
+                if (!data.artist_name.trim()) errors.artist_name = 'Artist/Group Name is required';
+                if (!data.contact_person.trim()) errors.contact_person = 'Contact Person is required';
+                if (!data.phone.trim()) errors.phone = 'Phone Number is required';
+                if (!data.email.trim()) {
+                    errors.email = 'Email is required';
+                } else if (!/\S+@\S+\.\S+/.test(data.email)) {
+                    errors.email = 'Invalid email format';
+                }
+                if (!data.city.trim()) errors.city = 'City is required';
+                if (!data.province) errors.province = 'Province is required';
+                break;
+            case 2:
+                if (!data.genre_performance.trim()) errors.genre_performance = 'Genre/Style is required';
+                if (!data.no_performers || data.no_performers <= 0) errors.no_performers = 'Number of performers is required';
+                if (!data.duration) errors.duration = 'Duration is required';
+                if (!data.technical_requirements.trim()) errors.technical_requirements = 'Technical requirements are required';
+                if (data.sound_check === undefined) errors.sound_check = 'Please select an option';
+                break;
+            case 3:
+                // These fields are optional, so no validation needed
+                break;
+            case 4:
+                if (data.media_interview === undefined) errors.media_interview = 'Please select an option';
+                if (!data.signature.trim()) errors.signature = 'Signature is required';
+                if (!data['cf-turnstile-response']) errors['cf-turnstile-response'] = 'Please complete the CAPTCHA';
+                break;
+        }
+        return errors;
+    };
+
 
     const steps = [
         <>
@@ -240,7 +276,7 @@ const ArtistForm = ({ success, error }: ArtistFormProps) => {
 
                 <RadioGroup
                     className="mt-2 ml-3"
-                    onValueChange={(value) => setData('sound_check', value === '1' ? true : value === '0' ? false : undefined)}
+                    onValueChange={(value) => setData('sound_check', value === '1' ? true : value === '0')}
                 >
                     <div className="flex items-center space-x-2">
                         <RadioGroupItem value="1" id="1" />
@@ -328,7 +364,9 @@ const ArtistForm = ({ success, error }: ArtistFormProps) => {
 
         <>
             <div className="flex flex-col">
-                <label htmlFor="media_interview">Are you interested in participating in media interviews or promotional campaigns?</label>
+                <label htmlFor="media_interview">Are you interested in participating in media interviews or promotional campaigns? 
+                    <span className="text-red-500">*</span>
+                </label>
 
                 <RadioGroup
                     className="mt-2 ml-3"
@@ -382,6 +420,16 @@ const ArtistForm = ({ success, error }: ArtistFormProps) => {
     const totalSteps = steps.length; // Adjust based on your step division
 
     const handleNext = () => {
+        const stepErrors = validateStep(currentStep);
+
+        if (Object.keys(stepErrors).length > 0) {
+            clearErrors();
+            Object.entries(stepErrors).forEach(([field, message]) => {
+                setError(field, message);
+            });
+            return;
+        }
+
         if (currentStep < totalSteps) {
             setCurrentStep((prev) => prev + 1);
             window.scrollTo(0, 330);
@@ -398,7 +446,17 @@ const ArtistForm = ({ success, error }: ArtistFormProps) => {
     const submit: FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
 
-        console.log(data);
+        // console.log(data);
+
+
+        const stepErrors = validateStep(totalSteps);
+        if (Object.keys(stepErrors).length > 0) {
+            clearErrors();
+            Object.entries(stepErrors).forEach(([field, message]) => {
+                setError(field, message);
+            });
+            return;
+        }
 
         post(route('artist-application.store'), {
             preserveScroll: true,
