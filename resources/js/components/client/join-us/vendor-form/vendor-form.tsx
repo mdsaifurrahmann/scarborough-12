@@ -296,7 +296,6 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                     <InputError className="mb-3" message={errors.vendor_type} />
                 </RadioGroup>
 
-
                 {data.vendor_type === 'Other' && (
                     <div className="mt-3 flex flex-col">
                         <label>
@@ -454,7 +453,8 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                 />
                 <InputError className="mb-3" message={errors.space} />
 
-                <label>Do you require electricity? 
+                <label>
+                    Do you require electricity?
                     <span className="text-red-500"> * </span>
                 </label>
                 <RadioGroup
@@ -490,7 +490,8 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                     </>
                 )}
 
-                <label>Do you have your own tent/table setup? 
+                <label>
+                    Do you have your own tent/table setup?
                     <span className="text-red-500"> * </span>
                 </label>
                 <RadioGroup
@@ -530,7 +531,9 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
                 </RadioGroup>
                 <InputError className="mb-3" message={errors.sponsore_opportunity} />
 
-                <label htmlFor="special_request" className='mt-3'>Special Requests or Comments</label>
+                <label htmlFor="special_request" className="mt-3">
+                    Special Requests or Comments
+                </label>
                 <input
                     type="text"
                     name="special_request"
@@ -603,7 +606,6 @@ const VendorForm = ({ success, error }: VendorFormProps) => {
             window.scrollTo(0, 330);
         }
     };
-
 
     const handleBack = () => {
         if (currentStep > 1) {

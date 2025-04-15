@@ -72,7 +72,6 @@ const ArtistForm = ({ success, error }: ArtistFormProps) => {
         'cf-turnstile-response': '',
     });
 
-
     const validateStep = (step: number): Record<string, string> => {
         const errors: Record<string, string> = {};
         switch (step) {
@@ -106,7 +105,6 @@ const ArtistForm = ({ success, error }: ArtistFormProps) => {
         }
         return errors;
     };
-
 
     const steps = [
         <>
@@ -274,10 +272,7 @@ const ArtistForm = ({ success, error }: ArtistFormProps) => {
 
                 <label htmlFor="sound_check">Do you require a soundcheck? (Applicable for Musicians or Bands)</label>
 
-                <RadioGroup
-                    className="mt-2 ml-3"
-                    onValueChange={(value) => setData('sound_check', value === '1' ? true : value === '0')}
-                >
+                <RadioGroup className="mt-2 ml-3" onValueChange={(value) => setData('sound_check', value === '1' ? true : value === '0')}>
                     <div className="flex items-center space-x-2">
                         <RadioGroupItem value="1" id="1" />
                         <label htmlFor="1">Yes</label>
@@ -364,7 +359,8 @@ const ArtistForm = ({ success, error }: ArtistFormProps) => {
 
         <>
             <div className="flex flex-col">
-                <label htmlFor="media_interview">Are you interested in participating in media interviews or promotional campaigns? 
+                <label htmlFor="media_interview">
+                    Are you interested in participating in media interviews or promotional campaigns?
                     <span className="text-red-500">*</span>
                 </label>
 
@@ -447,7 +443,6 @@ const ArtistForm = ({ success, error }: ArtistFormProps) => {
         e.preventDefault();
 
         // console.log(data);
-
 
         const stepErrors = validateStep(totalSteps);
         if (Object.keys(stepErrors).length > 0) {

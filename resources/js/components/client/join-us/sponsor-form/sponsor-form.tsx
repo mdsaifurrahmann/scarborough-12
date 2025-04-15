@@ -287,7 +287,6 @@ const SponsorForm = ({ success, error }: SponsorFormProps) => {
                             I understand that submitting this application does not guarantee sponsorship approval.
                         </label>
                     </div>
-
                 </div>
                 <InputError className="mb-3" message={errors.agreement_1} />
 
@@ -305,7 +304,6 @@ const SponsorForm = ({ success, error }: SponsorFormProps) => {
                             If accepted, I agree to fulfill the sponsorship requirements and provide all necessary materials on time.
                         </label>
                     </div>
-
                 </div>
                 <InputError className="mb-3" message={errors.agreement_2} />
 
@@ -323,7 +321,6 @@ const SponsorForm = ({ success, error }: SponsorFormProps) => {
                             I release Scarborough Folk Fest and its organizers from any liability related to my sponsorship
                         </label>
                     </div>
-
                 </div>
                 <InputError className="mb-3" message={errors.agreement_3} />
 
@@ -391,7 +388,6 @@ const SponsorForm = ({ success, error }: SponsorFormProps) => {
 
         // console.log(data);
 
-
         const stepErrors = validateStep(totalSteps);
         if (Object.keys(stepErrors).length > 0) {
             clearErrors();
@@ -400,7 +396,6 @@ const SponsorForm = ({ success, error }: SponsorFormProps) => {
             });
             return;
         }
-
 
         post(route('sponsor-application.store'), {
             preserveScroll: true,

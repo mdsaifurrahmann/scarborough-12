@@ -260,7 +260,8 @@ const VolunteerForm = ({ success, error }: VolunteerFormProps) => {
         // Step 3: Legal Requirements
         <>
             <div className="flex flex-col">
-                <label>Which day(s) are you available to volunteer?
+                <label>
+                    Which day(s) are you available to volunteer?
                     <span className="text-red-500"> * </span>
                 </label>
 
@@ -326,7 +327,8 @@ const VolunteerForm = ({ success, error }: VolunteerFormProps) => {
                     <InputError className="mb-3" message={errors.available_days} />
                 </div>
 
-                <label className="mt-4">Which areas of the festival would you be interested in volunteering for? (Max 3 selections)
+                <label className="mt-4">
+                    Which areas of the festival would you be interested in volunteering for? (Max 3 selections)
                     <span className="text-red-500"> * </span>
                 </label>
 
